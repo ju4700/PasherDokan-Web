@@ -1,0 +1,464 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronRight, Download, Star, CheckCircle, Mail, User, Building, ArrowRight } from 'lucide-react';
+
+const AppStoreBadge: React.FC<{ platform: 'ios' | 'android', className?: string }> = ({ platform, className }) => {
+  const store = platform === 'ios' ? 'App Store' : 'Google Play';
+  const icon = platform === 'ios' ? (
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+      <path d="M14.94 5.19A4.38 4.38 0 0 0 16 2a4.44 4.44 0 0 0-3 1.52 4.17 4.17 0 0 0-1 3.09 3.69 3.69 0 0 0 2.94-1.42zm2.52 7.44a4.51 4.51 0 0 1 2.16-3.81 4.66 4.66 0 0 0-3.66-2c-1.56-.16-3 .91-3.83.91-.83 0-2-.89-3.3-.87a4.92 4.92 0 0 0-4.14 2.53c-1.72 3-.45 7.37 1.28 9.79.86 1.22 1.88 2.6 3.24 2.56 1.3-.05 1.77-.82 3.33-.82 1.56 0 2 .82 3.38.79 1.39-.05 2.28-1.24 3.13-2.46a10.07 10.07 0 0 0 1.4-2.87 4.4 4.4 0 0 1-2.69-4.02z"></path>
+    </svg>
+  ) : (
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+      <path d="m12 15.5-8.2-5.5H12V4.12L3.26 9.8a1 1 0 0 0 0 1.7l8.74 5.88V15.5zm1.06 3.89L21.8 13.8a1 1 0 0 0 0-1.61L13.06 6.5v12.89z"></path>
+    </svg>
+  );
+
+  return (
+    <div className={`flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-800 hover:bg-gray-700 border border-gray-700 transition-all cursor-pointer hover:shadow-lg hover:scale-102 duration-300 ${className}`}>
+      <div className="flex-shrink-0 w-10 h-10 rounded-md bg-gradient-to-br from-primary-500 to-primary-600 text-white flex items-center justify-center shadow-sm">
+        {icon}
+      </div>
+      <div className="flex flex-col">
+        <span className="text-xs text-gray-400">Download on</span>
+        <span className="font-semibold text-white">{store}</span>
+      </div>
+    </div>
+  );
+};
+
+const Tab: React.FC<{ id: string, label: string, icon: React.ReactNode, active: boolean, onClick: () => void }> = ({ label, icon, active, onClick }) => (
+  <button
+    onClick={onClick}
+    className={`flex items-center gap-3 px-5 py-3.5 rounded-xl text-sm font-medium transition-all ${
+      active
+        ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/30'
+        : 'bg-white text-gray-600 hover:bg-gray-50'
+    }`}
+  >
+    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+      active ? 'bg-white/20 text-white' : 'bg-gray-100 text-primary-600'
+    }`}>
+      {icon}
+    </div>
+    {label}
+  </button>
+);
+
+const SignupForm: React.FC = () => {
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    businessType: '',
+  });
+  const [step, setStep] = useState(1);
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value
+    });
+  };
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setSuccess(true);
+    setSubmitting(false);
+  };
+  
+  const nextStep = () => setStep(step + 1);
+  const prevStep = () => setStep(step - 1);
+  
+  return (
+    <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+      {/* Form Header */}
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-800 opacity-90 z-0"></div>
+        <div className="absolute inset-0 bg-pattern-dots opacity-10 z-0"></div>
+        <div className="relative z-10 p-6 text-white">
+          <h3 className="text-xl font-bold mb-2">Start Your Digital Journey</h3>
+          <p className="text-primary-100">Join thousands of businesses already growing with PasherDokan.</p>
+          
+          {/* Progress bar */}
+          <div className="w-full h-1.5 bg-white/20 rounded-full mt-4 overflow-hidden">
+            <motion.div 
+              initial={{ width: `${(step-1) * 50}%` }}
+              animate={{ width: `${step * 50}%` }}
+              transition={{ duration: 0.5 }}
+              className="h-full bg-white"
+            />
+          </div>
+          
+          {/* Step indicator */}
+          <div className="flex justify-between mt-2 text-xs text-primary-100">
+            <span className={step >= 1 ? 'text-white font-medium' : ''}>Basic Info</span>
+            <span className={step >= 2 ? 'text-white font-medium' : ''}>Business Details</span>
+          </div>
+        </div>
+      </div>
+      
+      {/* Form Body */}
+      <div className="p-6">
+        <AnimatePresence mode="wait">
+          {success ? (
+            <motion.div
+              key="success"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="text-center py-8 px-4"
+            >
+              <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-4">
+                <CheckCircle className="text-green-600" size={32} />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">You're all set!</h3>
+              <p className="text-gray-600 mb-6">
+                Thanks for signing up. We'll be in touch soon with next steps.
+              </p>
+              <div className="flex justify-center gap-4 mt-4">
+                <AppStoreBadge platform="android" />
+                <AppStoreBadge platform="ios" />
+              </div>
+            </motion.div>
+          ) : (
+            <motion.form
+              key={`step-${step}`}
+              initial={{ opacity: 0, x: step === 1 ? -20 : 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: step === 1 ? 20 : -20 }}
+              onSubmit={handleSubmit}
+              className="space-y-5"
+            >
+              {step === 1 && (
+                <>
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                      Your Name
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                        <User size={18} />
+                      </div>
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        required
+                        placeholder="John Doe"
+                        value={formState.name}
+                        onChange={handleChange}
+                        className="w-full pl-10 pr-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                      Email Address
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                        <Mail size={18} />
+                      </div>
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        placeholder="you@example.com"
+                        value={formState.email}
+                        onChange={handleChange}
+                        className="w-full pl-10 pr-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="pt-4">
+                    <button
+                      type="button"
+                      onClick={nextStep}
+                      className="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3.5 px-6 rounded-xl flex justify-center items-center gap-2 transition-all shadow-lg shadow-primary-600/20"
+                    >
+                      Continue
+                      <ChevronRight size={18} />
+                    </button>
+                  </div>
+                </>
+              )}
+              
+              {step === 2 && (
+                <>
+                  <div>
+                    <label htmlFor="businessType" className="block text-sm font-medium text-gray-700 mb-1">
+                      Type of Business
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                        <Building size={18} />
+                      </div>
+                      <select
+                        id="businessType"
+                        name="businessType"
+                        required
+                        value={formState.businessType}
+                        onChange={handleChange}
+                        className="w-full pl-10 pr-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all appearance-none"
+                      >
+                        <option value="">Select your business type</option>
+                        <option value="retail">Retail Store</option>
+                        <option value="restaurant">Restaurant</option>
+                        <option value="service">Service Provider</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  {/* Feature selection checkboxes */}
+                  <div className="space-y-3 pt-3">
+                    <p className="text-sm font-medium text-gray-700">What features are you most interested in?</p>
+                    {['Inventory Management', 'Online Orders', 'Customer Loyalty', 'Analytics'].map(feature => (
+                      <label key={feature} className="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:border-primary-100 hover:bg-primary-50/20 cursor-pointer transition-all">
+                        <input type="checkbox" className="rounded text-primary-600 focus:ring-primary-500 h-5 w-5" />
+                        <span className="text-gray-700">{feature}</span>
+                      </label>
+                    ))}
+                  </div>
+                  
+                  <div className="flex gap-3 pt-4">
+                    <button
+                      type="button"
+                      onClick={prevStep}
+                      className="w-1/3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3.5 px-6 rounded-xl flex justify-center items-center transition-all"
+                    >
+                      Back
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="w-2/3 bg-primary-600 hover:bg-primary-700 text-white font-medium py-3.5 px-6 rounded-xl flex justify-center items-center gap-2 transition-all shadow-lg shadow-primary-600/20"
+                    >
+                      {submitting ? (
+                        <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
+                      ) : (
+                        <>
+                          Get Started
+                          <ArrowRight size={18} />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </>
+              )}
+            </motion.form>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
+const CallToAction: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('shopOwners');
+  
+  const features = {
+    shopOwners: [
+      { label: "Attract more local customers", icon: <Star size={18} /> },
+      { label: "Manage inventory with ease", icon: <Star size={18} /> },
+      { label: "Track sales in real-time", icon: <Star size={18} /> },
+      { label: "Accept digital payments", icon: <Star size={18} /> }
+    ],
+    suppliers: [
+      { label: "Connect with local retailers", icon: <Star size={18} /> },
+      { label: "Streamline distribution", icon: <Star size={18} /> },
+      { label: "Reduce excess inventory", icon: <Star size={18} /> },
+      { label: "Grow your business network", icon: <Star size={18} /> }
+    ]
+  };
+  
+  return (
+    <section className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-primary-50 to-transparent"></div>
+      <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-50 rounded-full blur-3xl opacity-70"></div>
+      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary-50 rounded-full blur-3xl opacity-70"></div>
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center max-w-4xl mx-auto mb-16">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-block py-2 px-5 rounded-full bg-primary-100 text-primary-800 font-semibold text-sm mb-4"
+          >
+            Transform Your Business
+          </motion.span>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl md:text-5xl font-bold mb-6 text-gray-900"
+          >
+            Your Shop, <span className="relative text-primary-600 inline-block">
+              Supercharged
+              <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 200 8" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 5.5C32 1.5 62 1.5 101.5 5.5C141 9.5 171 5.5 199 1.5" stroke="url(#paint0_linear)" strokeWidth="3" strokeLinecap="round"/>
+                <defs>
+                  <linearGradient id="paint0_linear" x1="1" y1="5" x2="199" y2="5" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#4F46E5" stopOpacity="0.3"/>
+                    <stop offset="0.5" stopColor="#4F46E5" stopOpacity="1"/>
+                    <stop offset="1" stopColor="#4F46E5" stopOpacity="0.3"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
+          >
+            Join thousands of businesses growing with PasherDokan's digital toolkit. Streamline operations, connect with customers, and boost your revenue.
+          </motion.p>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Left Column - Form */}
+          <div className="lg:col-span-5 order-2 lg:order-1">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative z-10"
+            >
+              <SignupForm />
+              
+              {/* Testimonial badge */}
+              <div className="mt-8 flex items-center p-4 rounded-xl bg-white/80 backdrop-blur border border-gray-100 shadow-sm">
+                <div className="flex -space-x-2 mr-4">
+                  {[1, 2, 3].map(i => (
+                    <div key={i} className={`w-10 h-10 rounded-full border-2 border-white bg-primary-${i*100} flex items-center justify-center text-white font-medium shadow-sm`}>
+                      {String.fromCharCode(64 + i)}
+                    </div>
+                  ))}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center mb-1">
+                    {[1, 2, 3, 4, 5].map(i => (
+                      <Star key={i} size={14} fill="#FBBF24" stroke="none" />
+                    ))}
+                    <span className="ml-1 text-xs text-gray-500">4,000+ reviews</span>
+                  </div>
+                  <p className="text-sm text-gray-600">
+                    "Transformed how I run my business. Customer service is excellent!"
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          
+          {/* Right Column - Features */}
+          <div className="lg:col-span-7 order-1 lg:order-2">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200"
+            >
+              {/* Tabs */}
+              <div className="flex gap-3 p-4 bg-gray-50 border-b border-gray-100">
+                <Tab 
+                  id="shopOwners"
+                  label="For Shop Owners" 
+                  icon={<Building size={18} />}
+                  active={activeTab === 'shopOwners'}
+                  onClick={() => setActiveTab('shopOwners')}
+                />
+                <Tab 
+                  id="suppliers"
+                  label="For Suppliers" 
+                  icon={<Download size={18} />}
+                  active={activeTab === 'suppliers'}
+                  onClick={() => setActiveTab('suppliers')}
+                />
+              </div>
+              
+              <div className="p-8">
+                {/* Feature showcase */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <AnimatePresence mode="wait">
+                    {features[activeTab === 'shopOwners' ? 'shopOwners' : 'suppliers'].map((feature, index) => (
+                      <motion.div
+                        key={`${activeTab}-${index}`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 border border-gray-100 hover:border-primary-200 hover:shadow-lg transition-all group"
+                      >
+                        <div className="flex items-start gap-4">
+                          <div className="w-10 h-10 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-600 group-hover:text-white transition-all">
+                            {feature.icon}
+                          </div>
+                          <div>
+                            <h3 className="font-semibold text-gray-800 mb-2">{feature.label}</h3>
+                            <p className="text-sm text-gray-600">
+                              Powerful tools that help you streamline operations and grow your business.
+                            </p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
+                
+                {/* App preview */}
+                <div className="mt-10 bg-gradient-to-br from-gray-900 to-primary-900 rounded-xl p-6 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-grid-pattern-light opacity-[0.03]"></div>
+                  
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div className="text-white max-w-md">
+                      <h3 className="text-xl font-bold mb-3">Download the mobile app</h3>
+                      <p className="text-gray-300 mb-6">Get the full PasherDokan experience on your smartphone. Manage your business anytime, anywhere.</p>
+                      
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <AppStoreBadge platform="android" />
+                        <AppStoreBadge platform="ios" />
+                      </div>
+                    </div>
+                    
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary-600 to-primary-400 rounded-xl blur-2xl opacity-30"></div>
+                      <div className="relative bg-gray-800 border-4 border-gray-700 rounded-3xl overflow-hidden w-56 h-96">
+                        <div className="h-4 w-20 bg-black absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-lg z-10"></div>
+                        <div className="bg-gradient-to-br from-primary-600 to-primary-800 h-full w-full">
+                          {/* Mock app interface could be placed here */}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default CallToAction;
