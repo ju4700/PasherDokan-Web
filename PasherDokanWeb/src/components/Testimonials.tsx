@@ -432,33 +432,6 @@ const Testimonials: React.FC = () => {
           </motion.div>
         </div>
         
-        {/* Stats Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-24"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1)" }}
-                className="bg-white rounded-xl p-6 border border-gray-100 shadow-lg flex items-start gap-4 transition-all"
-              >
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center text-primary-600 flex-shrink-0">
-                  {stat.icon}
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 mb-1">{stat.label}</p>
-                  <h4 className="text-2xl font-bold text-gray-900">{stat.value}</h4>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-        
         {/* Client logos section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

@@ -66,9 +66,11 @@ const Header: React.FC = () => {
           {/* Desktop navigation with enhanced styling */}
           <nav className="hidden md:flex items-center gap-3 mx-auto bg-white/60 px-2 py-1.5 rounded-full shadow-inner border border-gray-100/50">
             <NavLink href="#features" isActive={activeSection === 'features'}>Features</NavLink>
+            
             <NavLink href="#testimonials" isActive={activeSection === 'testimonials'}>Testimonials</NavLink>
-            <NavLink href="#team" isActive={activeSection === 'team'}>Team</NavLink>
+            
             <NavLink href="#faq" isActive={activeSection === 'faq'}>FAQ</NavLink>
+            <NavLink href="#team" isActive={activeSection === 'team'}>Team</NavLink>
           </nav>
 
           {/* Enhanced CTA button */}

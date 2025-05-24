@@ -54,11 +54,11 @@ export const features: FeatureType[] = [
 export const testimonials: TestimonialType[] = [
   {
     id: 1,
-    name: "Rahul Ahmed",
+    name: "Rahman Mia",
     role: "Owner",
     company: "Dhaka General Store",
-    content: "PasherDokan helped me digitize my store and reach more customers in my neighborhood. My sales have increased by 40% since joining, and the platform has made inventory management so much easier.",
-    avatar: "https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=150"
+    content: "পাশের দোকান আমার দোকানকে ডিজিটাল করতে এবং আমার আশেপাশের আরও বেশি গ্রাহকের কাছে পৌঁছাতে সাহায্য করেছে। যোগদানের পর থেকে আমার বিক্রয় ৪০% বেড়েছে, এবং প্ল্যাটফর্মটি ইনভেনটরি ব্যবস্থাপনা অনেক সহজ করে দিয়েছে।",
+    avatar: "https://images.pexels.com/photos/32191522/pexels-photo-32191522/free-photo-of-portrait-of-a-senior-man-sitting-outdoors-in-bangladesh.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     id: 2,
@@ -73,7 +73,7 @@ export const testimonials: TestimonialType[] = [
     name: "Mohammad Karim",
     role: "Managing Director",
     company: "Karim Electronics",
-    content: "PasherDokan has transformed how I do business. The local delivery feature is perfect for my customers, and the analytics help me make better inventory decisions. Highly recommended!",
+    content: "পাশের দোকান আমার ব্যবসার চেহারাটাই বদলে দিয়েছে! লোকাল ডেলিভারির সিস্টেমটা আমার কাস্টমারদের জন্য একদম পারফেক্ট, আর যেসব রিপোর্ট দেয় সেগুলো দেখে কোন প্রোডাক্ট কখন স্টক করতে হবে সেটা বুঝতে পারি। খুব ভালো জিনিস, সবাইকে নিতে বলব!",
     avatar: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=150"
   },
   {
@@ -81,8 +81,8 @@ export const testimonials: TestimonialType[] = [
     name: "Nusrat Jahan",
     role: "CEO",
     company: "Dhaka Bakery",
-    content: "Since joining PasherDokan, our daily orders have doubled. The platform's focus on local customers aligns perfectly with our business model. The customer service is also top-notch.",
-    avatar: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150"
+    content: "পাশের দোকানে জয়েন করার পর থেকে আমাদের ডেইলি অর্ডার দ্বিগুণ হয়ে গেছে। আমরা যেহেতু লোকাল এরিয়াতেই বিক্রি করতে চাই, তাই এই প্ল্যাটফর্মটা আমাদের ব্যবসার সাথে একদম মিলে গেছে। কাস্টমার সার্ভিসও সত্যিই অসাধারণ।",
+    avatar: "https://images.pexels.com/photos/15211652/pexels-photo-15211652/free-photo-of-portrait-of-woman-in-shawl-standing-on-road.jpeg?auto=compress&cs=tinysrgb&w=600"
   }
 ];
 

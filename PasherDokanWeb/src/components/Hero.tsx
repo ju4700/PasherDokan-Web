@@ -4,6 +4,24 @@ import { Download, ShoppingBag, Star, Users, Clock, CheckCircle, Building } from
 import Button from './Button';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
+// Fix Leaflet marker icons
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+// Setup default icon for all markers
+const DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+// Set the default icon for all markers
+L.Marker.prototype.options.icon = DefaultIcon;
 
 const MotionButton = motion(Button);
 
@@ -460,7 +478,7 @@ const Hero: React.FC = () => {
           <MotionButton 
             variant="outline"
             className="rounded-xl flex items-center justify-center px-8 py-4 border-2 border-gray-300 hover:border-primary-500 bg-white/80 backdrop-blur-sm hover:bg-primary-50/50"
-            onClick={() => window.open('https://expo.dev/artifacts/eas/gJc8UGG35sEZ5XXeeH1Hs.apk', '_blank')}
+            onClick={() => window.open('https://expo.dev/artifacts/eas/kK25nVCUj7mVTrPSe9gXZg.apk', '_blank')}
             whileHover={{ scale: 1.03, boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.1)" }}
             whileTap={{ scale: 0.97 }}
           >
@@ -468,26 +486,6 @@ const Hero: React.FC = () => {
             <span className="font-medium">Download APK</span>
           </MotionButton>
         </motion.div>
-        
-        {/* Trust indicators */}
-          <motion.div variants={itemVariants} className="flex flex-col items-center">
-            <div className="flex items-center mb-3">
-              <h4 className="text-sm font-medium text-gray-900 mr-3">Trusted partners:</h4>
-              <div className="flex items-center">
-                {[1, 2, 3, 4].map(i => (
-                  <div key={i} className="w-8 h-8 rounded-full bg-gray-200 -ml-2 first:ml-0 border-2 border-white"></div>
-                ))}
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={14} fill="#FBBF24" stroke="none" />
-                ))}
-              </div>
-              <span className="text-sm text-gray-600">4.8/5 from over 3,200+ reviews</span>
-            </div>
-          </motion.div>
       </div>
       
       {/* Add these styles for the map */}

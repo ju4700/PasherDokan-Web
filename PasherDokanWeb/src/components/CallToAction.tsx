@@ -360,7 +360,7 @@ const CallToAction: React.FC = () => {
                     {[1, 2, 3, 4, 5].map(i => (
                       <Star key={i} size={14} fill="#FBBF24" stroke="none" />
                     ))}
-                    <span className="ml-1 text-xs text-gray-500">4,000+ reviews</span>
+                    <span className="ml-1 text-xs text-gray-500">400+ reviews</span>
                   </div>
                   <p className="text-sm text-gray-600">
                     "Transformed how I run my business. Customer service is excellent!"
