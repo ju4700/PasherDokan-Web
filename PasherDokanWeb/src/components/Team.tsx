@@ -125,7 +125,7 @@ const Team: React.FC = () => {
   const teamMembers: TeamMember[] = useMemo(() => [
     {
       name: 'Jalal Uddin',
-      role: 'Full-Stack Developer',
+      role: 'Full-Stack Developer, Co-founder',
       university: 'International Islamic University, Chittagong',
       email: 'jalal.dev.design@gmail.com',
       github: 'https://github.com/ju4700',
@@ -134,7 +134,7 @@ const Team: React.FC = () => {
     },
     {
       name: 'Abu Zohaifa',
-      role: 'Full-Stack Developer',
+      role: 'Full-Stack Developer, Co-founder',
       university: 'International Islamic University, Chittagong',
       email: 'ultimatezrage@gmail.com',
       github: 'https://github.com/Zohaifa',
