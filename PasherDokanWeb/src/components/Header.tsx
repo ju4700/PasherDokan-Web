@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Menu, X, ShoppingBag, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import Button from './Button';
 
 const Header: React.FC = () => {
@@ -54,10 +54,11 @@ const Header: React.FC = () => {
 
           {/* Enhanced logo with improved animation */}
           <a href="#" className="flex items-center gap-2 group pt-0.5 transition-all duration-300">
-            <div className="relative w-10 h-10 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center text-white shadow-md transition-all group-hover:shadow-primary-300/30 group-hover:scale-105">
-              <div className="absolute inset-0.5 rounded-full bg-gradient-to-br from-white/10 to-transparent"></div>
-              <ShoppingBag size={16} className="transition-transform group-hover:scale-90 relative z-10" />
-            </div>
+            <img 
+              src="/images/icon.png" 
+              alt="PasherDokan Logo" 
+              className="w-10 h-10 object-contain transition-transform group-hover:scale-110 relative z-10"
+            />
             <span className="text-lg font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent hidden md:block transition-all group-hover:tracking-wide">
               <span className="opacity-90 hover:opacity-100"></span><span className="font-extrabold">PasherDokan</span>
             </span>
@@ -103,12 +104,11 @@ const Header: React.FC = () => {
         <div className="container mx-auto p-6">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 p-0.5 shadow-lg shadow-primary-300/20">
-                <div className="w-full h-full rounded-full bg-white flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white"></div>
-                  <ShoppingBag size={20} className="text-primary-600 relative z-10" />
-                </div>
-              </div>
+              <img 
+                src="/images/icon.png" 
+                alt="PasherDokan Logo" 
+                className="w-12 h-12 object-contain"
+              />
               <span className="text-xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
                 Pasher<span className="font-extrabold">Dokan</span>
               </span>
