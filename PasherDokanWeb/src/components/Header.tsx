@@ -79,7 +79,7 @@ const Header: React.FC = () => {
             variant="primary" 
             size="sm"
             className="ml-3 rounded-full shadow-md hover:shadow-lg transition-all hover:shadow-primary-400/20 relative overflow-hidden group"
-            onClick={() => window.open('https://play.google.com/store', '_blank')}
+            onClick={() => window.open('https://expo.dev/artifacts/eas/89xfBQHPfuyv9zbhuSCred.apk', '_blank')}
           >
             <span className="relative z-10">Get App</span>
             <span className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>

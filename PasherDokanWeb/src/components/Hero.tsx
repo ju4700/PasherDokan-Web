@@ -268,7 +268,7 @@ const Hero: React.FC = () => {
               />
               <Tab 
                 id="suppliers"
-                label="For Suppliers" 
+                label="For Suppliers (A Future Feature)" 
                 icon={<Building size={18} />}
                 active={activeTab === 'suppliers'}
                 onClick={() => setActiveTab('suppliers')}

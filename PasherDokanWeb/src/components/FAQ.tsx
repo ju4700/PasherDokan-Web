@@ -350,7 +350,7 @@ export default function FAQ() {
                   icon: <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
                     <MessageCircleQuestion size={24} />
                   </div>,
-                  title: '5000+ questions',
+                  title: '500+ questions',
                   description: 'Comprehensive knowledge base for all users'
                 }
               ].map((stat, i) => (

@@ -150,7 +150,7 @@ const SignupForm: React.FC = () => {
                         name="name"
                         type="text"
                         required
-                        placeholder="John Doe"
+                        placeholder="Jasim Uddin"
                         value={formState.name}
                         onChange={handleChange}
                         className="w-full pl-10 pr-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
@@ -390,7 +390,7 @@ const CallToAction: React.FC = () => {
                 />
                 <Tab 
                   id="suppliers"
-                  label="For Suppliers" 
+                  label="For Suppliers (Upcoming Feature)" 
                   icon={<Download size={18} />}
                   active={activeTab === 'suppliers'}
                   onClick={() => setActiveTab('suppliers')}
