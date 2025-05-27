@@ -140,6 +140,15 @@ const Team: React.FC = () => {
       github: 'https://github.com/Zohaifa',
       linkedin: 'https://linkedin.com',
       image: '/images/zohaifa.jpg',
+    },
+    {
+      name: 'Ahmed Shariar Plabon',
+      role: 'Marketing Manager',
+      university: 'International Islamic University, Chittagong',
+      email: 'ahmedshahriar948@gmail.com',
+      github: 'https://github.com/shahriar7ahmed',
+      linkedin: 'https://linkedin.com',
+      image: '/images/plabon.jpg',
     }
   ], []);
 
