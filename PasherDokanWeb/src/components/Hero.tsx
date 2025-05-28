@@ -478,7 +478,7 @@ const Hero: React.FC = () => {
           <MotionButton 
             variant="outline"
             className="rounded-xl flex items-center justify-center px-8 py-4 border-2 border-gray-300 hover:border-primary-500 bg-white/80 backdrop-blur-sm hover:bg-primary-50/50"
-            onClick={() => window.open('https://drive.google.com/file/d/1gLm8aF1oP90LN62TQzgPvao1eoG8iJf7/view?usp=drivesdk', '_blank')}
+            onClick={() => window.open('https://drive.google.com/drive/folders/1FnaZ_hFtoB4soxhhjO_jxe8CG9rLwC4H', '_blank')}
             whileHover={{ scale: 1.03, boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.1)" }}
             whileTap={{ scale: 0.97 }}
           >
