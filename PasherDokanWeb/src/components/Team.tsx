@@ -148,7 +148,6 @@ const Team: React.FC = () => {
       linkedin: 'https://linkedin.com/ju4700',
       image: '/images/jalal.jpg',
       bio: 'Leading the overall project development for PasherDokan\'s hyperlocal e-commerce platform, focusing on user experience and strategic direction for Bangladesh\'s SME ecosystem.',
-      skills: ['React', 'TypeScript', 'UI/UX Design', 'Product Strategy']
     },
     {
       name: 'Abu Zohaifa',
@@ -159,7 +158,6 @@ const Team: React.FC = () => {
       linkedin: 'https://linkedin.com',
       image: '/images/zohaifa.jpg',
       bio: 'Architecting the backend infrastructure for PasherDokan\'s scalable platform targeting 96,000 SMEs across Bangladesh.',
-      skills: ['Node.js', 'MongoDB', 'System Architecture', 'API Design']
     },
     {
       name: 'Ahmed Shariar Plabon',
@@ -170,7 +168,6 @@ const Team: React.FC = () => {
       linkedin: 'https://linkedin.com',
       image: '/images/plabon.jpg',
       bio: 'Driving market penetration strategy for Bangladesh\'s $6 billion retail addressable market, starting with Chattogram pilot program.',
-      skills: ['Market Research', 'Digital Marketing', 'Business Strategy', 'Data Analytics']
     }
   ], []);
 

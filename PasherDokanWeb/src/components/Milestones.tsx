@@ -60,8 +60,8 @@ const Milestones: React.FC = () => {
       icon: <Store className="w-6 h-6" />,
       status: 'in-progress',
       progress: 35,
-      startDate: 'April 2025',
-      completionDate: 'June 2025'
+      startDate: 'June 2025',
+      completionDate: 'July 2025'
     },
     {
       id: '2',
