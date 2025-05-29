@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import Button from './Button';
+import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const { t } = useLanguage();
   
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 50);
@@ -66,24 +69,29 @@ const Header: React.FC = () => {
 
           {/* Desktop navigation with enhanced styling */}
           <nav className="hidden md:flex items-center gap-3 mx-auto bg-white/60 px-2 py-1.5 rounded-full shadow-inner border border-gray-100/50">
-            <NavLink href="#features" isActive={activeSection === 'features'}>Features</NavLink>
+            <NavLink href="#features" isActive={activeSection === 'features'}>{t('nav.features')}</NavLink>
             
-            <NavLink href="#testimonials" isActive={activeSection === 'testimonials'}>Testimonials</NavLink>
+            <NavLink href="#testimonials" isActive={activeSection === 'testimonials'}>{t('nav.testimonials')}</NavLink>
             
-            <NavLink href="#faq" isActive={activeSection === 'faq'}>FAQ</NavLink>
-            <NavLink href="#team" isActive={activeSection === 'team'}>Team</NavLink>
+            <NavLink href="#faq" isActive={activeSection === 'faq'}>{t('nav.faq')}</NavLink>
+            <NavLink href="#team" isActive={activeSection === 'team'}>{t('nav.team')}</NavLink>
           </nav>
 
-          {/* Enhanced CTA button */}
-          <Button 
-            variant="primary" 
-            size="sm"
-            className="ml-3 rounded-full shadow-md hover:shadow-lg transition-all hover:shadow-primary-400/20 relative overflow-hidden group"
-            onClick={() => window.open('https://expo.dev/artifacts/eas/89xfBQHPfuyv9zbhuSCred.apk', '_blank')}
-          >
-            <span className="relative z-10">Get App</span>
-            <span className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-          </Button>
+          {/* Language toggle and CTA section */}
+          <div className="flex items-center gap-3">
+            <LanguageToggle />
+            
+            {/* Enhanced CTA button */}
+            <Button 
+              variant="primary" 
+              size="sm"
+              className="rounded-full shadow-md hover:shadow-lg transition-all hover:shadow-primary-400/20 relative overflow-hidden group"
+              onClick={() => window.open('https://expo.dev/artifacts/eas/89xfBQHPfuyv9zbhuSCred.apk', '_blank')}
+            >
+              <span className="relative z-10">{t('nav.getStarted')}</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -124,20 +132,24 @@ const Header: React.FC = () => {
 
           <nav className="flex flex-col space-y-2.5">
             <MobileNavLink href="#features" onClick={() => setIsOpen(false)} isActive={activeSection === 'features'}>
-              Features
+              {t('nav.features')}
             </MobileNavLink>
             <MobileNavLink href="#testimonials" onClick={() => setIsOpen(false)} isActive={activeSection === 'testimonials'}>
-              Testimonials
+              {t('nav.testimonials')}
             </MobileNavLink>
             <MobileNavLink href="#team" onClick={() => setIsOpen(false)} isActive={activeSection === 'team'}>
-              Team
+              {t('nav.team')}
             </MobileNavLink>
             <MobileNavLink href="#faq" onClick={() => setIsOpen(false)} isActive={activeSection === 'faq'}>
-              FAQ
+              {t('nav.faq')}
             </MobileNavLink>
           </nav>
 
           <div className="mt-8 pt-6 border-t border-gray-100">
+            {/* Language toggle for mobile */}
+            <div className="mb-4">
+              <LanguageToggle />
+            </div>
             <Button 
               variant="primary" 
               className="w-full rounded-xl py-3.5 text-base font-medium shadow-lg relative overflow-hidden group"
@@ -146,7 +158,7 @@ const Header: React.FC = () => {
                 setIsOpen(false);
               }}
             >
-              <span className="relative z-10">Download App</span>
+              <span className="relative z-10">{t('nav.getStarted')}</span>
               <span className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
             </Button>
             

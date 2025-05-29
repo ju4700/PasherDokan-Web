@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Github, Mail, Linkedin, Code, Users, Star, ChevronRight, Award, GraduationCap } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface TeamMember {
   name: string;
@@ -31,9 +32,23 @@ const TeamMemberCard: React.FC<{ member: TeamMember; index: number }> = ({ membe
               <div className="absolute inset-0 bg-gradient-to-b from-gray-900/0 to-gray-900/70 z-10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <img 
                 src={member.image} 
-                alt={member.name} 
+                alt={`${member.name} - ${member.role}`}
+                loading="lazy"
                 className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                onError={(e) => {
+                  // Fallback if image fails to load
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const fallback = target.nextElementSibling as HTMLElement;
+                  if (fallback) fallback.style.display = 'flex';
+                }}
               />
+              {/* Fallback div (hidden by default) */}
+              <div className="w-full h-full bg-gradient-to-br from-primary-500/20 to-primary-300/30 flex items-center justify-center" style={{ display: 'none' }}>
+                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-white/60 backdrop-blur-sm text-gray-400">
+                  <Users size={40} />
+                </div>
+              </div>
             </>
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-primary-500/20 to-primary-300/30 flex items-center justify-center">
@@ -50,8 +65,8 @@ const TeamMemberCard: React.FC<{ member: TeamMember; index: number }> = ({ membe
                 href={member.github} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-primary-600 transition-colors backdrop-blur-sm shadow-lg hover:shadow-xl transform hover:scale-110"
-                aria-label="GitHub"
+                className="p-2.5 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-primary-600 transition-colors backdrop-blur-sm shadow-lg hover:shadow-xl transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                aria-label={`Visit ${member.name}'s GitHub profile`}
               >
                 <Github size={18} />
               </a>
@@ -61,16 +76,16 @@ const TeamMemberCard: React.FC<{ member: TeamMember; index: number }> = ({ membe
                 href={member.linkedin} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-primary-600 transition-colors backdrop-blur-sm shadow-lg hover:shadow-xl transform hover:scale-110"
-                aria-label="LinkedIn"
+                className="p-2.5 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-primary-600 transition-colors backdrop-blur-sm shadow-lg hover:shadow-xl transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                aria-label={`Visit ${member.name}'s LinkedIn profile`}
               >
                 <Linkedin size={18} />
               </a>
             )}
             <a 
               href={`mailto:${member.email}`} 
-              className="p-2.5 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-primary-600 transition-colors backdrop-blur-sm shadow-lg hover:shadow-xl transform hover:scale-110"
-              aria-label="Email"
+              className="p-2.5 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-primary-600 transition-colors backdrop-blur-sm shadow-lg hover:shadow-xl transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+              aria-label={`Send email to ${member.name}`}
             >
               <Mail size={18} />
             </a>
@@ -120,35 +135,42 @@ const TeamMemberCard: React.FC<{ member: TeamMember; index: number }> = ({ membe
 };
 
 const Team: React.FC = () => {
+  const { t } = useLanguage();
   const [filteredMembers, setFilteredMembers] = useState<TeamMember[]>([]);
-  
+
   const teamMembers: TeamMember[] = useMemo(() => [
     {
       name: 'Jalal Uddin',
-      role: 'Lead Developer, Co-founder',
+      role: 'Project Lead, Co-founder',
       university: 'International Islamic University, Chittagong',
       email: 'jalal.dev.design@gmail.com',
       github: 'https://github.com/ju4700',
       linkedin: 'https://linkedin.com/ju4700',
       image: '/images/jalal.jpg',
+      bio: 'Leading the overall project development for PasherDokan\'s hyperlocal e-commerce platform, focusing on user experience and strategic direction for Bangladesh\'s SME ecosystem.',
+      skills: ['React', 'TypeScript', 'UI/UX Design', 'Product Strategy']
     },
     {
       name: 'Abu Zohaifa',
-      role: 'Backend Developer, Co-founder',
+      role: 'Backend Lead, Co-founder',
       university: 'International Islamic University, Chittagong',
       email: 'ultimatezrage@gmail.com',
       github: 'https://github.com/Zohaifa',
       linkedin: 'https://linkedin.com',
       image: '/images/zohaifa.jpg',
+      bio: 'Architecting the backend infrastructure for PasherDokan\'s scalable platform targeting 96,000 SMEs across Bangladesh.',
+      skills: ['Node.js', 'MongoDB', 'System Architecture', 'API Design']
     },
     {
       name: 'Ahmed Shariar Plabon',
-      role: 'Marketing Manager',
+      role: 'Marketing Strategy Lead',
       university: 'International Islamic University, Chittagong',
       email: 'ahmedshahriar948@gmail.com',
       github: 'https://github.com/shahriar7ahmed',
       linkedin: 'https://linkedin.com',
       image: '/images/plabon.jpg',
+      bio: 'Driving market penetration strategy for Bangladesh\'s $6 billion retail addressable market, starting with Chattogram pilot program.',
+      skills: ['Market Research', 'Digital Marketing', 'Business Strategy', 'Data Analytics']
     }
   ], []);
 
@@ -174,28 +196,16 @@ const Team: React.FC = () => {
         >
           <div className="inline-block mb-3">
             <span className="inline-block py-1.5 px-4 rounded-full bg-primary-50/80 text-primary-700 font-semibold text-sm tracking-wide">
-              Our Team
+              {t('team.badge')}
             </span>
           </div>
           
           <h2 className="text-3xl md:text-5xl font-bold mb-5 text-gray-900 leading-tight">
-            Meet Our <span className="relative text-primary-600 inline-block">
-              Dream Team
-              <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 200 8" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 5.5C32 1.5 62 1.5 101.5 5.5C141 9.5 171 5.5 199 1.5" stroke="url(#paint0_linear)" strokeWidth="3" strokeLinecap="round"/>
-                <defs>
-                  <linearGradient id="paint0_linear" x1="1" y1="5" x2="199" y2="5" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#4F46E5" stopOpacity="0.3"/>
-                    <stop offset="0.5" stopColor="#4F46E5" stopOpacity="1"/>
-                    <stop offset="1" stopColor="#4F46E5" stopOpacity="0.3"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </span>
+            {t('team.title')}
           </h2>
           
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-            The talented developers behind PasherDokan bringing digital solutions to local shops across Bangladesh.
+            {t('team.subtitle')}
           </p>
         </motion.div>
         
@@ -204,7 +214,7 @@ const Team: React.FC = () => {
           {filteredMembers.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredMembers.map((member, index) => (
-                <TeamMemberCard key={index} member={member} index={index} />
+                <TeamMemberCard key={`${member.name}-${index}`} member={member} index={index} />
               ))}
             </div>
           ) : (
@@ -212,6 +222,8 @@ const Team: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="text-center py-16 bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm"
+              role="status"
+              aria-live="polite"
             >
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-50 text-gray-400 mb-4">
                 <Users size={24} />
@@ -221,11 +233,11 @@ const Team: React.FC = () => {
                 Try adjusting your search or select a different role filter.
               </p>
               <button 
-                onClick={() => {
-                }}
-                className="mt-6 px-5 py-2.5 bg-primary-50 text-primary-700 font-medium rounded-lg hover:bg-primary-100 transition-colors"
+                onClick={() => setFilteredMembers(teamMembers)}
+                className="mt-6 px-5 py-2.5 bg-primary-50 text-primary-700 font-medium rounded-lg hover:bg-primary-100 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                aria-label="Reset filters to view full team"
               >
-                View Full Team
+                {t('team.viewFull')}
               </button>
             </motion.div>
           )}
@@ -239,24 +251,24 @@ const Team: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="mt-24 mb-24"
         >
-          <h3 className="text-2xl font-bold text-gray-900 text-center mb-10">Our Core <span className="text-primary-600">Values</span></h3>
+          <h3 className="text-2xl font-bold text-gray-900 text-center mb-10">{t('team.coreValues')}</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 icon: <Award size={24} />,
-                title: "Excellence",
-                description: "We strive for excellence in every line of code and every user interaction."
+                title: t('team.smeEmpowerment'),
+                description: "Transforming 80% of Bangladesh's 1.2 million retail outlets through hyperlocal technology solutions."
               },
               {
                 icon: <Users size={24} />,
-                title: "Collaboration",
-                description: "We believe in the power of teamwork to solve complex problems together."
+                title: t('team.hyperlocalFocus'),
+                description: "Connecting customers with nearby shops using OpenStreetMap, preserving cash-on-pickup preferences."
               },
               {
                 icon: <Star size={24} />,
-                title: "Innovation",
-                description: "We continuously explore new technologies to deliver cutting-edge solutions."
+                title: t('team.marketRevolution'),
+                description: "Capturing 10% of the $6 billion addressable market with scalable, subscription-based solutions."
               }
             ].map((value, index) => (
               <motion.div
@@ -297,12 +309,12 @@ const Team: React.FC = () => {
               <div className="md:w-3/5">
                 <div className="inline-block mb-3">
                   <span className="inline-block py-1 px-3 rounded-full bg-primary-100 text-primary-700 text-sm font-medium">
-                    We're Hiring!
+                    {t('team.hiring')}
                   </span>
                 </div>
                 
                 <h3 className="text-2xl md:text-3xl font-bold mb-5 text-gray-900">
-                  Want to Join Our <span className="text-primary-600">Amazing Team</span>?
+                  {t('team.joinTeam')}
                 </h3>
                 
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
@@ -311,19 +323,21 @@ const Team: React.FC = () => {
                   Bangladesh's local commerce ecosystem.
                 </p>
                 
-                <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
                   <a 
                     href="mailto:careers@pasherdoban.com" 
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-xl transition-colors shadow-lg shadow-primary-600/20 hover:shadow-xl hover:shadow-primary-600/30"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-xl transition-colors shadow-lg shadow-primary-600/20 hover:shadow-xl hover:shadow-primary-600/30 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 group"
+                    aria-label="Send your resume to join our team"
                   >
-                    Send Your Resume
+                    {t('team.sendResume')}
                     <ChevronRight size={18} className="transition-transform group-hover:translate-x-0.5" />
                   </a>
                   <a 
                     href="#contact" 
-                    className="inline-flex items-center px-6 py-3 bg-white hover:bg-gray-50 text-gray-800 font-medium rounded-xl transition-colors border border-gray-200 shadow-sm hover:shadow-md"
+                    className="inline-flex items-center justify-center px-6 py-3 bg-white hover:bg-gray-50 text-gray-800 font-medium rounded-xl transition-colors border border-gray-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                    aria-label="Learn more about working with us"
                   >
-                    Learn More
+                    {t('team.learnMore')}
                   </a>
                 </div>
                 

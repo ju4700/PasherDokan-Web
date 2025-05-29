@@ -1,7 +1,9 @@
 import React from 'react';
 import { Twitter, Instagram, Linkedin, Facebook, ChevronRight, Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer: React.FC = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
   
   return (
@@ -34,19 +36,17 @@ const Footer: React.FC = () => {
                   <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent transition-all group-hover:tracking-wide">
                     PasherDokan
                   </span>
-                  <p className="text-xs text-gray-500 mt-0.5 tracking-wider uppercase">The Hyper-Local Marketplace</p>
+                  <p className="text-xs text-gray-500 mt-0.5 tracking-wider uppercase">{t('footer.tagline')}</p>
                 </div>
               </div>
               
               <p className="text-gray-600 mb-8 leading-relaxed text-sm">
-                Bridging the gap between traditional local commerce and modern digital convenience. 
-                We empower local businesses to thrive in the digital age while preserving the 
-                personal touch of neighborhood shopping.
+                {t('footer.description')}
               </p>
               
               {/* Enhanced social media links */}
               <div className="space-y-4">
-                <h5 className="text-sm font-semibold text-gray-800 mb-3">Follow Us</h5>
+                <h5 className="text-sm font-semibold text-gray-800 mb-3">{t('footer.followUs')}</h5>
                 <div className="flex space-x-4">
                   {[
                     { icon: <Facebook size={18} />, label: "Facebook", color: "hover:bg-blue-500" },
@@ -72,16 +72,16 @@ const Footer: React.FC = () => {
             {/* Quick Links */}
             <div className="lg:col-span-2">
               <h4 className="text-lg font-bold mb-6 text-gray-800 relative inline-block">
-                Company
+                {t('footer.quickLinks')}
                 <span className="absolute -bottom-2 left-0 w-8 h-1 bg-gradient-to-r from-primary-500 to-primary-400 rounded-full"></span>
               </h4>
               <ul className="space-y-4">
                 {[
-                  { name: "About Us", href: "#" },
-                  { name: "Careers", href: "#" },
-                  { name: "Press & Media", href: "#" },
-                  { name: "Partnerships", href: "#" },
-                  { name: "Investor Relations", href: "#" }
+                  { name: "SME Success Stories", href: "#" },
+                  { name: "Hyperlocal Solutions", href: "#" },
+                  { name: "Chattogram Pilot", href: "#" },
+                  { name: "Market Expansion", href: "#" },
+                  { name: "Bangladesh Retail", href: "#" }
                 ].map((item, index) => (
                   <li key={index}>
                     <a href={item.href} className="text-gray-600 hover:text-primary-600 transition-all text-sm group flex items-center">
@@ -96,16 +96,16 @@ const Footer: React.FC = () => {
             {/* Support Links */}
             <div className="lg:col-span-2">
               <h4 className="text-lg font-bold mb-6 text-gray-800 relative inline-block">
-                Support
+                {t('footer.support')}
                 <span className="absolute -bottom-2 left-0 w-8 h-1 bg-gradient-to-r from-primary-500 to-primary-400 rounded-full"></span>
               </h4>
               <ul className="space-y-4">
                 {[
-                  { name: "Help Center", href: "#" },
-                  { name: "Contact Support", href: "#" },
-                  { name: "User Guides", href: "#" },
-                  { name: "Community Forum", href: "#" },
-                  { name: "API Documentation", href: "#" }
+                  { name: "Shop Owner Guide", href: "#" },
+                  { name: "Customer Support", href: "#" },
+                  { name: "Cash-on-Pickup Help", href: "#" },
+                  { name: "Inventory Management", href: "#" },
+                  { name: "Analytics Dashboard", href: "#" }
                 ].map((item, index) => (
                   <li key={index}>
                     <a href={item.href} className="text-gray-600 hover:text-primary-600 transition-all text-sm group flex items-center">
@@ -120,7 +120,7 @@ const Footer: React.FC = () => {
             {/* Contact Information */}
             <div className="lg:col-span-4">
               <h4 className="text-lg font-bold mb-6 text-gray-800 relative inline-block">
-                Get In Touch
+                {t('footer.getInTouch')}
                 <span className="absolute -bottom-2 left-0 w-8 h-1 bg-gradient-to-r from-primary-500 to-primary-400 rounded-full"></span>
               </h4>
               
@@ -132,9 +132,10 @@ const Footer: React.FC = () => {
                       <MapPin size={16} />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-800">Address</p>
+                      <p className="text-sm font-medium text-gray-800">{t('footer.address')}</p>
                       <p className="text-sm text-gray-600 mt-1">
-                        Oxygen, Chittagong, Bangladesh
+                        International Islamic University Chittagong<br />
+                        Kumira, Chittagong, Bangladesh
                       </p>
                     </div>
                   </div>
@@ -144,7 +145,7 @@ const Footer: React.FC = () => {
                       <Mail size={16} />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-800">Email</p>
+                      <p className="text-sm font-medium text-gray-800">{t('footer.email')}</p>
                       <a href="mailto:pasherdokanofficial@gmail.com" className="text-sm text-gray-600 hover:text-primary-600 transition-colors flex items-center gap-1 mt-1">
                         pasherdokanofficial@gmail.com
                         <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -157,7 +158,7 @@ const Footer: React.FC = () => {
                       <Phone size={16} />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-800">Phone</p>
+                      <p className="text-sm font-medium text-gray-800">{t('footer.phone')}</p>
                       <a href="tel:+8801234567890" className="text-sm text-gray-600 hover:text-primary-600 transition-colors flex items-center gap-1 mt-1">
                         +880 123 456 7890
                         <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -188,7 +189,7 @@ const Footer: React.FC = () => {
                 </select>
                 
                 <div className="text-xs text-gray-500">
-                  Made with ❤️ in Bangladesh
+                  {t('footer.madeWithLove')}
                 </div>
               </div>
             </div>

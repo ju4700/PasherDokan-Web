@@ -1,0 +1,79 @@
+{
+  "name": "PasherDokan - Digital Solutions for Local Shops",
+  "short_name": "PasherDokan",
+  "description": "Connect with customers, digitize inventory, and grow your local shop business with PasherDokan's powerful yet simple platform.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#14b8a6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["business", "productivity", "shopping"],
+  "icons": [
+    {
+      "src": "/images/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/images/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "View Features",
+      "short_name": "Features",
+      "description": "Explore PasherDokan's core features",
+      "url": "/#features",
+      "icons": [
+        {
+          "src": "/images/icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Customer Stories",
+      "short_name": "Testimonials",
+      "description": "Read success stories from shop owners",
+      "url": "/#testimonials",
+      "icons": [
+        {
+          "src": "/images/icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Get Help",
+      "short_name": "FAQ",
+      "description": "Find answers to common questions",
+      "url": "/#faq",
+      "icons": [
+        {
+          "src": "/images/icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/screenshot-mobile.png",
+      "sizes": "640x1136",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/images/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}

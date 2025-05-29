@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MapPin, Wallet, Store, Smartphone, ShieldCheck, BarChart3, Truck, Zap, ArrowRight } from 'lucide-react';
 import { features } from '../data/content';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const FeatureIcon: React.FC<{ icon: string }> = ({ icon }) => {
   const iconMap: Record<string, React.ReactNode> = {
@@ -26,6 +27,7 @@ const FeatureIcon: React.FC<{ icon: string }> = ({ icon }) => {
 };
 
 const Features: React.FC = () => {
+  const { t } = useLanguage();
   const [hovered, setHovered] = useState<number | null>(null);
   
   return (
@@ -44,7 +46,7 @@ const Features: React.FC = () => {
             className="inline-block"
           >
             <span className="py-1.5 px-5 bg-primary-50 text-primary-700 font-semibold text-sm rounded-full shadow-sm border border-primary-100/50 inline-block mb-3">
-              Powerful Features
+              {t('features.badge')}
             </span>
           </motion.div>
           
@@ -55,8 +57,8 @@ const Features: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-900"
           >
-            Why Shop Owners <span className="text-primary-600 relative">
-              Choose PasherDokan
+            {t('features.title.part1')} <span className="text-primary-600 relative">
+              {t('features.title.part2')}
               <span className="absolute bottom-1 left-0 w-full h-2 bg-primary-100/60 -z-10"></span>
             </span>
           </motion.h2>
@@ -68,7 +70,7 @@ const Features: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg lg:text-xl text-gray-600"
           >
-            Everything you need to take your local shop online and grow your business.
+            {t('features.subtitle')}
           </motion.p>
         </div>
         
@@ -130,13 +132,13 @@ const Features: React.FC = () => {
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-10 md:p-12 relative z-10">
               <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                 <div className="text-white md:max-w-xl">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4">Ready to grow your local shop business?</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4">{t('features.cta.title')}</h3>
                   <p className="opacity-90 leading-relaxed text-lg">
-                    Join thousands of shop owners already using PasherDokan to connect with nearby customers and increase sales.
+                    {t('features.cta.description')}
                   </p>
                   
                   <ul className="mt-6 space-y-2">
-                    {['Free for shop owners', 'Setup in minutes', 'No technical skills required'].map((item, index) => (
+                    {[t('features.cta.point1'), t('features.cta.point2'), t('features.cta.point3')].map((item, index) => (
                       <li key={index} className="flex items-center text-white/90">
                         <div className="w-5 h-5 rounded-full bg-white/20 mr-3 flex items-center justify-center">
                           <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -154,7 +156,7 @@ const Features: React.FC = () => {
                   className="px-8 py-4 bg-white text-primary-600 rounded-xl font-medium hover:bg-gray-50 transition-colors shadow-lg hover:shadow-xl group relative overflow-hidden min-w-[200px]"
                 >
                   <div className="relative z-10 flex items-center justify-center">
-                    <span>Get Started Free</span>
+                    <span>{t('features.cta.button')}</span>
                     <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-r from-white to-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

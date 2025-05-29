@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   icon
 }) => {
-  const baseClasses = "inline-flex items-center justify-center font-medium transition-all duration-300 focus:outline-none focus:ring focus:ring-opacity-50";
+  const baseClasses = "inline-flex items-center justify-center font-medium transition-all duration-200 transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2";
   
   const variantClasses = {
     primary: "bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white shadow-md hover:shadow-lg focus:ring-primary-400",
@@ -42,9 +42,10 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       type={type}
-      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${radiusClasses} ${disabledClasses} ${className}`}
       onClick={onClick}
       disabled={disabled}
+      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${radiusClasses} ${disabledClasses} ${className}`}
+      aria-disabled={disabled}
     >
       {icon && <span className="mr-2">{icon}</span>}
       {children}

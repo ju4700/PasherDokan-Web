@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, ArrowRight, Quote, Star, Bookmark, ThumbsUp, User, Building } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Quote, Star, Bookmark, Building } from 'lucide-react';
 import { testimonials } from '../data/content';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface CompanyLogoProps {
   name: string;
@@ -134,10 +135,14 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 };
 
 const Testimonials: React.FC = () => {
+  const { t } = useLanguage();
   const [featuredIndex, setFeaturedIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -147,6 +152,40 @@ const Testimonials: React.FC = () => {
   const rotateCards = useTransform(scrollYProgress, [0, 1], [5, -5]);
   const scaleCards = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.95]);
   const opacityText = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.6, 1, 1, 0.8]);
+
+  // Mobile detection
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Touch gesture handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && !isAnimating) {
+      nextTestimonial();
+    } else if (isRightSwipe && !isAnimating) {
+      prevTestimonial();
+    }
+  };
 
   const resetAutoRotation = () => {
     if (intervalRef.current) {
@@ -199,13 +238,6 @@ const Testimonials: React.FC = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
-  // Enhanced testimonial stats
-  const stats = [
-    { icon: <User size={18} />, label: "Happy Customers", value: "10,000+" },
-    { icon: <Star size={18} />, label: "Average Rating", value: "4.8/5" },
-    { icon: <ThumbsUp size={18} />, label: "Satisfaction Rate", value: "97%" },
-  ];
-
   return (
     <section 
       id="testimonials" 
@@ -231,7 +263,7 @@ const Testimonials: React.FC = () => {
             className="inline-block mb-3"
           >
             <span className="inline-block py-1.5 px-4 rounded-full bg-primary-50/80 text-primary-700 font-semibold text-sm tracking-wide">
-              Customer Stories
+              {t('testimonials.badge')}
             </span>
           </motion.div>
           
@@ -242,19 +274,7 @@ const Testimonials: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-5xl font-bold mb-5 text-gray-900 leading-tight"
           >
-            What <span className="relative text-primary-600 inline-block">
-              Shop Owners
-              <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 200 8" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 5.5C32 1.5 62 1.5 101.5 5.5C141 9.5 171 5.5 199 1.5" stroke="url(#paint0_linear)" strokeWidth="3" strokeLinecap="round"/>
-                <defs>
-                  <linearGradient id="paint0_linear" x1="1" y1="5" x2="199" y2="5" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#4F46E5" stopOpacity="0.3"/>
-                    <stop offset="0.5" stopColor="#4F46E5" stopOpacity="1"/>
-                    <stop offset="1" stopColor="#4F46E5" stopOpacity="0.3"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </span> Are Saying
+            {t('testimonials.title')}
           </motion.h2>
           
           <motion.p 
@@ -264,7 +284,7 @@ const Testimonials: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg md:text-xl text-gray-600 leading-relaxed"
           >
-            Real success stories from local businesses thriving with PasherDokan's digital tools.
+            {t('testimonials.subtitle')}
           </motion.p>
         </motion.div>
 
@@ -278,6 +298,9 @@ const Testimonials: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
               className="relative"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
               <AnimatePresence mode="wait">
                 <motion.div
@@ -293,7 +316,7 @@ const Testimonials: React.FC = () => {
                     <div className="absolute top-6 right-6 z-20">
                       <div className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg">
                         <Bookmark size={12} className="fill-white" />
-                        Featured Story
+                        {t('testimonials.featuredStory')}
                       </div>
                     </div>
                     
@@ -368,23 +391,28 @@ const Testimonials: React.FC = () => {
               <div className="flex justify-between mt-6">
                 <button 
                   onClick={prevTestimonial}
-                  className="group w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-all border border-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-                  aria-label="Previous testimonial"
+                  className="group w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-all border border-gray-100 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+                  aria-label={t('testimonials.previousTestimonial')}
                   disabled={isAnimating}
                 >
                   <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-0.5" />
                 </button>
                 
-                <div className="flex gap-1.5">
+                <div className="flex gap-1.5 items-center">
+                  {isMobile && (
+                    <span className="text-xs text-gray-400 mr-2 font-medium">
+                      {t('testimonials.swipeHint')}
+                    </span>
+                  )}
                   {testimonials.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => selectTestimonial(index)}
-                      className={`transition-all ${
+                      className={`transition-all touch-manipulation ${
                         index === featuredIndex 
                           ? 'w-8 h-2.5 bg-primary-600 rounded-full shadow-sm' 
                           : 'w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400 rounded-full'
-                      }`}
+                      } ${isMobile ? 'min-w-[20px] min-h-[20px]' : ''}`}
                       aria-label={`Go to testimonial ${index + 1}`}
                       disabled={isAnimating}
                     />
@@ -393,8 +421,8 @@ const Testimonials: React.FC = () => {
                 
                 <button 
                   onClick={nextTestimonial}
-                  className="group w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-all border border-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-                  aria-label="Next testimonial"
+                  className="group w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-all border border-gray-100 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+                  aria-label={t('testimonials.nextTestimonial')}
                   disabled={isAnimating}
                 >
                   <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
@@ -442,7 +470,7 @@ const Testimonials: React.FC = () => {
         >
           <div className="flex flex-col items-center">
             <p className="text-center text-gray-500 text-sm uppercase tracking-wider mb-8 font-medium">
-              Trusted by local businesses across Bangladesh
+              {t('testimonials.trustedBy')}
             </p>
             
             <div className="bg-gradient-to-r from-gray-50 via-white to-gray-50 p-6 rounded-2xl shadow-sm border border-gray-100 w-full">

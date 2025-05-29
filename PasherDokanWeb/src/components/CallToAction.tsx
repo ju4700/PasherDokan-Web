@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Download, Star, CheckCircle, Mail, User, Building, ArrowRight } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
-const AppStoreBadge: React.FC<{ platform: 'ios' | 'android', className?: string }> = ({ platform, className }) => {
+const AppStoreBadge: React.FC<{ platform: 'ios' | 'android', className?: string, t: (key: string) => string }> = ({ platform, className, t }) => {
   const store = platform === 'ios' ? 'App Store' : 'Google Play';
   const icon = platform === 'ios' ? (
     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
@@ -20,7 +21,7 @@ const AppStoreBadge: React.FC<{ platform: 'ios' | 'android', className?: string 
         {icon}
       </div>
       <div className="flex flex-col">
-        <span className="text-xs text-gray-400">Download on</span>
+        <span className="text-xs text-gray-400">{t('cta.downloadOn')}</span>
         <span className="font-semibold text-white">{store}</span>
       </div>
     </div>
@@ -45,7 +46,7 @@ const Tab: React.FC<{ id: string, label: string, icon: React.ReactNode, active: 
   </button>
 );
 
-const SignupForm: React.FC = () => {
+const SignupForm: React.FC<{ t: (key: string) => string }> = ({ t }) => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -82,8 +83,8 @@ const SignupForm: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-800 opacity-90 z-0"></div>
         <div className="absolute inset-0 bg-pattern-dots opacity-10 z-0"></div>
         <div className="relative z-10 p-6 text-white">
-          <h3 className="text-xl font-bold mb-2">Start Your Digital Journey</h3>
-          <p className="text-primary-100">Join thousands of businesses already growing with PasherDokan.</p>
+          <h3 className="text-xl font-bold mb-2">{t('cta.formTitle')}</h3>
+          <p className="text-primary-100">{t('cta.formSubtitle')}</p>
           
           {/* Progress bar */}
           <div className="w-full h-1.5 bg-white/20 rounded-full mt-4 overflow-hidden">
@@ -97,8 +98,8 @@ const SignupForm: React.FC = () => {
           
           {/* Step indicator */}
           <div className="flex justify-between mt-2 text-xs text-primary-100">
-            <span className={step >= 1 ? 'text-white font-medium' : ''}>Basic Info</span>
-            <span className={step >= 2 ? 'text-white font-medium' : ''}>Business Details</span>
+            <span className={step >= 1 ? 'text-white font-medium' : ''}>{t('cta.basicInfo')}</span>
+            <span className={step >= 2 ? 'text-white font-medium' : ''}>{t('cta.businessDetails')}</span>
           </div>
         </div>
       </div>
@@ -117,13 +118,13 @@ const SignupForm: React.FC = () => {
               <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-4">
                 <CheckCircle className="text-green-600" size={32} />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">You're all set!</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">{t('cta.successTitle')}</h3>
               <p className="text-gray-600 mb-6">
-                Thanks for signing up. We'll be in touch soon with next steps.
+                {t('cta.successMessage')}
               </p>
               <div className="flex justify-center gap-4 mt-4">
-                <AppStoreBadge platform="android" />
-                <AppStoreBadge platform="ios" />
+                <AppStoreBadge platform="android" t={t} />
+                <AppStoreBadge platform="ios" t={t} />
               </div>
             </motion.div>
           ) : (
@@ -139,7 +140,7 @@ const SignupForm: React.FC = () => {
                 <>
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                      Your Name
+                      {t('cta.yourName')}
                     </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
@@ -150,7 +151,7 @@ const SignupForm: React.FC = () => {
                         name="name"
                         type="text"
                         required
-                        placeholder="Jasim Uddin"
+                        placeholder={t('cta.namePlaceholder')}
                         value={formState.name}
                         onChange={handleChange}
                         className="w-full pl-10 pr-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
@@ -160,7 +161,7 @@ const SignupForm: React.FC = () => {
                   
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email Address
+                      {t('cta.emailAddress')}
                     </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
@@ -171,7 +172,7 @@ const SignupForm: React.FC = () => {
                         name="email"
                         type="email"
                         required
-                        placeholder="you@example.com"
+                        placeholder={t('cta.emailPlaceholder')}
                         value={formState.email}
                         onChange={handleChange}
                         className="w-full pl-10 pr-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
@@ -185,7 +186,7 @@ const SignupForm: React.FC = () => {
                       onClick={nextStep}
                       className="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3.5 px-6 rounded-xl flex justify-center items-center gap-2 transition-all shadow-lg shadow-primary-600/20"
                     >
-                      Continue
+                      {t('cta.continue')}
                       <ChevronRight size={18} />
                     </button>
                   </div>
@@ -196,7 +197,7 @@ const SignupForm: React.FC = () => {
                 <>
                   <div>
                     <label htmlFor="businessType" className="block text-sm font-medium text-gray-700 mb-1">
-                      Type of Business
+                      {t('cta.businessType')}
                     </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
@@ -210,22 +211,27 @@ const SignupForm: React.FC = () => {
                         onChange={handleChange}
                         className="w-full pl-10 pr-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all appearance-none"
                       >
-                        <option value="">Select your business type</option>
-                        <option value="retail">Retail Store</option>
-                        <option value="restaurant">Restaurant</option>
-                        <option value="service">Service Provider</option>
-                        <option value="other">Other</option>
+                        <option value="">{t('cta.businessPlaceholder')}</option>
+                        <option value="retail">{t('cta.retailStore')}</option>
+                        <option value="restaurant">{t('cta.restaurant')}</option>
+                        <option value="service">{t('cta.serviceProvider')}</option>
+                        <option value="other">{t('cta.other')}</option>
                       </select>
                     </div>
                   </div>
                   
                   {/* Feature selection checkboxes */}
                   <div className="space-y-3 pt-3">
-                    <p className="text-sm font-medium text-gray-700">What features are you most interested in?</p>
-                    {['Inventory Management', 'Online Orders', 'Customer Loyalty', 'Analytics'].map(feature => (
-                      <label key={feature} className="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:border-primary-100 hover:bg-primary-50/20 cursor-pointer transition-all">
+                    <p className="text-sm font-medium text-gray-700">{t('cta.featuresInterested')}</p>
+                    {[
+                      { key: 'cta.inventoryManagement', value: 'Inventory Management' },
+                      { key: 'cta.onlineOrders', value: 'Online Orders' },
+                      { key: 'cta.customerLoyalty', value: 'Customer Loyalty' },
+                      { key: 'cta.analytics', value: 'Analytics' }
+                    ].map(feature => (
+                      <label key={feature.value} className="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:border-primary-100 hover:bg-primary-50/20 cursor-pointer transition-all">
                         <input type="checkbox" className="rounded text-primary-600 focus:ring-primary-500 h-5 w-5" />
-                        <span className="text-gray-700">{feature}</span>
+                        <span className="text-gray-700">{t(feature.key)}</span>
                       </label>
                     ))}
                   </div>
@@ -236,7 +242,7 @@ const SignupForm: React.FC = () => {
                       onClick={prevStep}
                       className="w-1/3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3.5 px-6 rounded-xl flex justify-center items-center transition-all"
                     >
-                      Back
+                      {t('cta.back')}
                     </button>
                     <button
                       type="submit"
@@ -247,7 +253,7 @@ const SignupForm: React.FC = () => {
                         <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
                       ) : (
                         <>
-                          Get Started
+                          {t('cta.getStarted')}
                           <ArrowRight size={18} />
                         </>
                       )}
@@ -264,20 +270,21 @@ const SignupForm: React.FC = () => {
 };
 
 const CallToAction: React.FC = () => {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('shopOwners');
   
   const features = {
     shopOwners: [
-      { label: "Attract more local customers", icon: <Star size={18} /> },
-      { label: "Manage inventory with ease", icon: <Star size={18} /> },
-      { label: "Track sales in real-time", icon: <Star size={18} /> },
-      { label: "Accept digital payments", icon: <Star size={18} /> }
+      { label: t('cta.attractCustomers'), icon: <Star size={18} /> },
+      { label: t('cta.manageInventory'), icon: <Star size={18} /> },
+      { label: t('cta.trackSales'), icon: <Star size={18} /> },
+      { label: t('cta.acceptPayments'), icon: <Star size={18} /> }
     ],
     suppliers: [
-      { label: "Connect with local retailers", icon: <Star size={18} /> },
-      { label: "Streamline distribution", icon: <Star size={18} /> },
-      { label: "Reduce excess inventory", icon: <Star size={18} /> },
-      { label: "Grow your business network", icon: <Star size={18} /> }
+      { label: t('cta.connectRetailers'), icon: <Star size={18} /> },
+      { label: t('cta.streamlineDistribution'), icon: <Star size={18} /> },
+      { label: t('cta.reduceInventory'), icon: <Star size={18} /> },
+      { label: t('cta.growNetwork'), icon: <Star size={18} /> }
     ]
   };
   
@@ -292,13 +299,13 @@ const CallToAction: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-4xl mx-auto mb-16">
           <motion.span
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="inline-block py-2 px-5 rounded-full bg-primary-100 text-primary-800 font-semibold text-sm mb-4"
           >
-            Transform Your Business
+            {t('cta.badge')}
           </motion.span>
           
           <motion.h2
@@ -308,19 +315,7 @@ const CallToAction: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-5xl font-bold mb-6 text-gray-900"
           >
-            Your Shop, <span className="relative text-primary-600 inline-block">
-              Supercharged
-              <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 200 8" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 5.5C32 1.5 62 1.5 101.5 5.5C141 9.5 171 5.5 199 1.5" stroke="url(#paint0_linear)" strokeWidth="3" strokeLinecap="round"/>
-                <defs>
-                  <linearGradient id="paint0_linear" x1="1" y1="5" x2="199" y2="5" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#4F46E5" stopOpacity="0.3"/>
-                    <stop offset="0.5" stopColor="#4F46E5" stopOpacity="1"/>
-                    <stop offset="1" stopColor="#4F46E5" stopOpacity="0.3"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </span>
+            {t('cta.title')}
           </motion.h2>
           
           <motion.p
@@ -330,7 +325,7 @@ const CallToAction: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            Join thousands of businesses growing with PasherDokan's digital toolkit. Streamline operations, connect with customers, and boost your revenue.
+            {t('cta.subtitle')}
           </motion.p>
         </div>
         
@@ -344,7 +339,7 @@ const CallToAction: React.FC = () => {
               transition={{ duration: 0.6 }}
               className="relative z-10"
             >
-              <SignupForm />
+              <SignupForm t={t} />
               
               {/* Testimonial badge */}
               <div className="mt-8 flex items-center p-4 rounded-xl bg-white/80 backdrop-blur border border-gray-100 shadow-sm">
@@ -360,10 +355,10 @@ const CallToAction: React.FC = () => {
                     {[1, 2, 3, 4, 5].map(i => (
                       <Star key={i} size={14} fill="#FBBF24" stroke="none" />
                     ))}
-                    <span className="ml-1 text-xs text-gray-500">400+ reviews</span>
+                    <span className="ml-1 text-xs text-gray-500">{t('cta.testimonialReviews')}</span>
                   </div>
                   <p className="text-sm text-gray-600">
-                    "Transformed how I run my business. Customer service is excellent!"
+                    {t('cta.testimonialQuote')}
                   </p>
                 </div>
               </div>
@@ -383,14 +378,14 @@ const CallToAction: React.FC = () => {
               <div className="flex gap-3 p-4 bg-gray-50 border-b border-gray-100">
                 <Tab 
                   id="shopOwners"
-                  label="For Shop Owners" 
+                  label={t('cta.forShopOwners')} 
                   icon={<Building size={18} />}
                   active={activeTab === 'shopOwners'}
                   onClick={() => setActiveTab('shopOwners')}
                 />
                 <Tab 
                   id="suppliers"
-                  label="For Suppliers (Upcoming Feature)" 
+                  label={t('cta.forSuppliersUpcoming')} 
                   icon={<Download size={18} />}
                   active={activeTab === 'suppliers'}
                   onClick={() => setActiveTab('suppliers')}
@@ -417,7 +412,7 @@ const CallToAction: React.FC = () => {
                           <div>
                             <h3 className="font-semibold text-gray-800 mb-2">{feature.label}</h3>
                             <p className="text-sm text-gray-600">
-                              Powerful tools that help you streamline operations and grow your business.
+                              {t('cta.featureDescription')}
                             </p>
                           </div>
                         </div>
@@ -432,12 +427,12 @@ const CallToAction: React.FC = () => {
                   
                   <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="text-white max-w-md">
-                      <h3 className="text-xl font-bold mb-3">Download the mobile app</h3>
-                      <p className="text-gray-300 mb-6">Get the full PasherDokan experience on your smartphone. Manage your business anytime, anywhere.</p>
+                      <h3 className="text-xl font-bold mb-3">{t('cta.downloadMobileApp')}</h3>
+                      <p className="text-gray-300 mb-6">{t('cta.mobileAppDescription')}</p>
                       
                       <div className="flex flex-col sm:flex-row gap-4">
-                        <AppStoreBadge platform="android" />
-                        <AppStoreBadge platform="ios" />
+                        <AppStoreBadge platform="android" t={t} />
+                        <AppStoreBadge platform="ios" t={t} />
                       </div>
                     </div>
                     

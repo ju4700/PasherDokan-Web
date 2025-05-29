@@ -5,6 +5,7 @@ import Button from './Button';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Fix Leaflet marker icons
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -64,8 +65,8 @@ const generateRandomMarkers = (centerLat: number, centerLng: number, count: numb
   
   markers.push({
     position: [centerLat, centerLng],
-    name: "PasherDokan Headquarters",
-    info: "Local marketplace hub"
+    name: "PasherDokan Pilot Hub",
+    info: "Chattogram launch location"
   });
   
   for (let i = 0; i < count; i++) {
@@ -77,7 +78,7 @@ const generateRandomMarkers = (centerLat: number, centerLng: number, count: numb
     markers.push({
       position: [centerLat + latOffset, centerLng + lngOffset],
       name: `${storeInfo.type}`,
-      info: `${storeInfo.distance} km away`
+      info: `${storeInfo.distance} km away • Cash pickup available`
     });
   }
   
@@ -85,12 +86,13 @@ const generateRandomMarkers = (centerLat: number, centerLng: number, count: numb
 };
 
 const Hero: React.FC = () => {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('shopOwners');
   const containerRef = useRef<HTMLDivElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
   const isPhoneInView = useInView(mockupRef, { once: true });
   
-  const mapMarkers = generateRandomMarkers(23.8103, 90.4125, 30);
+  const mapMarkers = generateRandomMarkers(22.3569, 91.7832, 30);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -154,21 +156,21 @@ const Hero: React.FC = () => {
 
   const tabFeatures = {
     shopOwners: [
-      { title: "Local Customer Reach", description: "Bring customers directly to your doorstep" },
-      { title: "Inventory Management", description: "Track stock and sales in real-time" },
-      { title: "Digital Payments", description: "Accept cashless payments securely" }
+      { title: t('hero.features.shopOwners.discovery.title'), description: t('hero.features.shopOwners.discovery.description') },
+      { title: t('hero.features.shopOwners.inventory.title'), description: t('hero.features.shopOwners.inventory.description') },
+      { title: t('hero.features.shopOwners.cashPickup.title'), description: t('hero.features.shopOwners.cashPickup.description') }
     ],
     suppliers: [
-      { title: "Retail Network", description: "Connect with hundreds of local retailers" },
-      { title: "Delivery Logistics", description: "Streamline product distribution" },
-      { title: "Real-time Analytics", description: "Get insights on market demand" }
+      { title: t('hero.features.suppliers.network.title'), description: t('hero.features.suppliers.network.description') },
+      { title: t('hero.features.suppliers.insights.title'), description: t('hero.features.suppliers.insights.description') },
+      { title: t('hero.features.suppliers.distribution.title'), description: t('hero.features.suppliers.distribution.description') }
     ]
   };
 
   const statsData = [
-    { icon: <Users size={18} />, value: "10,000+", label: "Shop Owners" },
-    { icon: <Star size={18} />, value: "4.8", label: "App Rating" },
-    { icon: <Clock size={18} />, value: "20min", label: "Avg. Delivery" }
+    { icon: <Users size={18} />, value: "96,000", label: t('hero.stats.targetShops') },
+    { icon: <Star size={18} />, value: "$6B", label: t('hero.stats.marketSize') },
+    { icon: <Clock size={18} />, value: "80%", label: t('hero.stats.smeCoverage') }
   ];
 
   return (
@@ -214,7 +216,7 @@ const Hero: React.FC = () => {
                 <ShoppingBag size={16} className="text-white" />
               </motion.div>
               <span className="text-sm font-semibold text-gray-800">
-                <span className="font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">Trusted by</span> 10,000+ Local Shops
+                <span className="font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">{t('hero.badge.targeting')}</span> {t('hero.badge.localShops')}
               </span>
             </div>
           </motion.div>
@@ -224,10 +226,10 @@ const Hero: React.FC = () => {
             variants={itemVariants} 
             className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-gray-900"
           >
-            Transform Your 
+            {t('hero.heading.transform')} 
             <br className="hidden sm:block" />
             <span className="relative text-primary-600 inline-block">
-              Local Business
+              {t('hero.heading.localBusiness')}
               <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 200 8" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 5.5C32 1.5 62 1.5 101.5 5.5C141 9.5 171 5.5 199 1.5" stroke="url(#paint0_linear)" strokeWidth="3" strokeLinecap="round"/>
                 <defs>
@@ -246,7 +248,7 @@ const Hero: React.FC = () => {
             variants={itemVariants}
             className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed max-w-2xl mx-auto"
           >
-            Join thousands of shop owners across Bangladesh using PasherDokan to connect with nearby customers, streamline operations, and boost revenues by up to 40%.
+            {t('hero.description')}
           </motion.p>
         </motion.div>
 
@@ -261,14 +263,14 @@ const Hero: React.FC = () => {
             <motion.div variants={itemVariants} className="flex justify-center gap-3 mb-6 overflow-x-auto pb-1 scrollbar-hide">
               <Tab 
                 id="shopOwners"
-                label="For Shop Owners" 
+                label={t('hero.tabs.shopOwners')} 
                 icon={<ShoppingBag size={18} />}
                 active={activeTab === 'shopOwners'}
                 onClick={() => setActiveTab('shopOwners')}
               />
               <Tab 
                 id="suppliers"
-                label="For Suppliers (A Future Feature)" 
+                label={t('hero.tabs.suppliers')} 
                 icon={<Building size={18} />}
                 active={activeTab === 'suppliers'}
                 onClick={() => setActiveTab('suppliers')}
@@ -292,8 +294,8 @@ const Hero: React.FC = () => {
                     <CheckCircle size={16} />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900 text-sm">Order Completed</h4>
-                    <p className="text-xs text-gray-600">15 minutes delivery time</p>
+                    <h4 className="font-medium text-gray-900 text-sm">Order Ready for Pickup</h4>
+                    <p className="text-xs text-gray-600">Cash payment on collection</p>
                   </div>
                 </div>
               </motion.div>
@@ -359,7 +361,7 @@ const Hero: React.FC = () => {
                   <div className="pt-10 pb-8 overflow-hidden h-full">
                     <div className="h-full w-full">
                       <MapContainer 
-                        center={[23.8103, 90.4125]} 
+                        center={[22.3569, 91.7832]} 
                         zoom={14} 
                         style={{ height: '100%', width: '100%' }}
                         attributionControl={false}
@@ -429,7 +431,7 @@ const Hero: React.FC = () => {
                       ))}
                       <Star key={5} size={12} className="text-gray-300" fill="currentColor" stroke="none" />
                     </div>
-                    <p className="text-xs text-gray-600">Great service! Will order again.</p>
+                    <p className="text-xs text-gray-600">Hyperlocal SME empowerment platform</p>
                   </div>
                 </div>
               </motion.div>
@@ -473,7 +475,7 @@ const Hero: React.FC = () => {
             whileTap={{ scale: 0.97 }}
           >
             <Download size={18} className="mr-2.5" />
-            <span className="font-medium">Google Play</span>
+            <span className="font-medium">{t('hero.cta.googlePlay')}</span>
           </MotionButton>
           <MotionButton 
             variant="outline"
@@ -483,7 +485,7 @@ const Hero: React.FC = () => {
             whileTap={{ scale: 0.97 }}
           >
             <Download size={18} className="mr-2.5" />
-            <span className="font-medium">Download APK</span>
+            <span className="font-medium">{t('hero.cta.downloadApk')}</span>
           </MotionButton>
         </motion.div>
       </div>

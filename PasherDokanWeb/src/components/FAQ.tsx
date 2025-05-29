@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronDown, Search, MessageCircleQuestion, HelpCircle, ExternalLink, ArrowRight, Filter, CheckCircle } from 'lucide-react';
 import { faqs } from '../data/content';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface FAQCategory {
   id: string;
@@ -10,6 +11,7 @@ interface FAQCategory {
 }
 
 export default function FAQ() {
+  const { t } = useLanguage();
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [filteredFAQs, setFilteredFAQs] = useState(faqs);
@@ -64,28 +66,16 @@ export default function FAQ() {
         >
           <div className="inline-block mb-3">
             <span className="inline-block py-1.5 px-4 rounded-full bg-primary-50/80 text-primary-700 font-semibold text-sm tracking-wide">
-              Support Center
+              {t('faq.badge')}
             </span>
           </div>
           
           <h2 className="text-3xl md:text-5xl font-bold mb-5 text-gray-900 leading-tight">
-            Frequently Asked <span className="relative text-primary-600 inline-block">
-              Questions
-              <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 200 8" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 5.5C32 1.5 62 1.5 101.5 5.5C141 9.5 171 5.5 199 1.5" stroke="url(#paint0_linear)" strokeWidth="3" strokeLinecap="round"/>
-                <defs>
-                  <linearGradient id="paint0_linear" x1="1" y1="5" x2="199" y2="5" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#4F46E5" stopOpacity="0.3"/>
-                    <stop offset="0.5" stopColor="#4F46E5" stopOpacity="1"/>
-                    <stop offset="1" stopColor="#4F46E5" stopOpacity="0.3"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </span>
+            {t('faq.title')}
           </h2>
           
           <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Find answers to common questions about PasherDokan and how it can help your business grow in the digital marketplace.
+            {t('faq.subtitle')}
           </p>
         </motion.div>
         
@@ -111,7 +101,7 @@ export default function FAQ() {
                 <input
                   type="text"
                   className="block w-full pl-12 pr-4 py-3.5 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all duration-200 focus:outline-none"
-                  placeholder="Search for questions..."
+                  placeholder={t('faq.searchPlaceholder')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -280,7 +270,7 @@ export default function FAQ() {
                   className="px-6 py-3 bg-primary-50 text-primary-700 font-medium rounded-lg hover:bg-primary-100 transition-colors inline-flex items-center gap-2"
                 >
                   <Filter size={18} />
-                  View All Questions
+                  {t('faq.viewAll')}
                 </button>
               </motion.div>
             )}
@@ -299,9 +289,9 @@ export default function FAQ() {
               
               <div className="relative flex flex-col md:flex-row items-center justify-between gap-6 p-8 md:p-10">
                 <div className="text-center md:text-left">
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">Still have questions?</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">{t('faq.contactSupport')}</h3>
                   <p className="text-primary-100 max-w-lg">
-                    Our dedicated support team is here to help you. Get in touch for personalized assistance with any questions about PasherDokan.
+                    {t('faq.contactDesc')}
                   </p>
                 </div>
                 
@@ -310,7 +300,7 @@ export default function FAQ() {
                     href="#contact" 
                     className="inline-flex items-center px-7 py-4 bg-white hover:bg-gray-50 text-primary-700 font-medium rounded-xl transition-all shadow-lg shadow-primary-700/20 hover:shadow-xl hover:shadow-primary-700/30 group"
                   >
-                    Contact Support Team
+                    {t('faq.getHelp')}
                     <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
                   </a>
                 </div>
