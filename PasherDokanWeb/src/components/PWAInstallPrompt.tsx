@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, X, Smartphone, Monitor, Wifi, WifiOff } from 'lucide-react';
+import { Download, X, Smartphone, Monitor, Wifi, WifiOff, FileText } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePWA } from '../hooks/usePWA';
 // import { useLanguage } from '../contexts/LanguageContext'; // Will be used when translations are implemented
@@ -8,6 +8,15 @@ const PWAInstallPrompt: React.FC = () => {
   const { isInstallable, isInstalled, install, isOffline } = usePWA();
   // const { t } = useLanguage(); // Removed for now as translations are not yet implemented
   const [isDismissed, setIsDismissed] = useState(false);
+
+  const handleAPKDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/apk/pasherdokan.apk';
+    link.download = 'pasherdokan.apk';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   // Don't show if already installed, not installable, or dismissed
   if (isInstalled || !isInstallable || isDismissed) {
@@ -82,23 +91,35 @@ const PWAInstallPrompt: React.FC = () => {
                 <span>Desktop support</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-gray-600">
-                <Download size={12} className="text-primary-500" />
-                <span>Auto updates</span>
+                <FileText size={12} className="text-primary-500" />
+                <span>APK available</span>
               </div>
             </div>
 
             {/* Action buttons */}
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2">
+              {/* PWA Install Button */}
               <button
                 onClick={install}
-                className="flex-1 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-sm font-medium py-2.5 px-4 rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white text-sm font-medium py-2.5 px-4 rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
               >
                 <Download size={14} />
-                Install
+                Install as PWA
               </button>
+              
+              {/* APK Download Button */}
+              <button
+                onClick={handleAPKDownload}
+                className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white text-sm font-medium py-2.5 px-4 rounded-xl hover:from-green-700 hover:to-green-800 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+              >
+                <FileText size={14} />
+                Download APK
+              </button>
+              
+              {/* Later Button */}
               <button
                 onClick={() => setIsDismissed(true)}
-                className="px-4 py-2.5 text-gray-600 text-sm font-medium rounded-xl hover:bg-gray-50 transition-colors"
+                className="w-full px-4 py-2.5 text-gray-600 text-sm font-medium rounded-xl hover:bg-gray-50 transition-colors"
               >
                 Later
               </button>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useScroll, useTransform, useMotionValue } from 'framer-motion';
-import { Download, ShoppingBag, Star, Users, Clock, CheckCircle, Building } from 'lucide-react';
+import { Download, ShoppingBag, Star, Users, Clock, CheckCircle, Building, FileText } from 'lucide-react';
 import Button from './Button';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useLanguage } from '../contexts/LanguageContext';
+import { usePWA } from '../hooks/usePWA';
 
 // Fix Leaflet marker icons
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -87,12 +88,22 @@ const generateRandomMarkers = (centerLat: number, centerLng: number, count: numb
 
 const Hero: React.FC = () => {
   const { t } = useLanguage();
+  const { install, isInstallable } = usePWA();
   const [activeTab, setActiveTab] = useState('shopOwners');
   const containerRef = useRef<HTMLDivElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
   const isPhoneInView = useInView(mockupRef, { once: true });
   
   const mapMarkers = generateRandomMarkers(22.3569, 91.7832, 30);
+
+  const handleAPKDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/apk/pasherdokan.apk';
+    link.download = 'pasherdokan.apk';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -465,28 +476,58 @@ const Hero: React.FC = () => {
           initial="hidden"
           animate="visible"
           variants={contentVariants}
-          className="mt-12 max-w-2xl mx-auto text-center flex flex-col sm:flex-row gap-4 justify-center"
+          className="mt-12 max-w-2xl mx-auto text-center"
         >
-          <MotionButton 
-            variant="primary" 
-            className="rounded-xl shadow-xl flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600"
-            onClick={() => window.open('https://play.google.com/store', '_blank')}
-            whileHover={{ scale: 1.03, boxShadow: "0 20px 30px -10px rgba(79, 70, 229, 0.4)" }}
-            whileTap={{ scale: 0.97 }}
-          >
-            <Download size={18} className="mr-2.5" />
-            <span className="font-medium">{t('hero.cta.googlePlay')}</span>
-          </MotionButton>
-          <MotionButton 
-            variant="outline"
-            className="rounded-xl flex items-center justify-center px-8 py-4 border-2 border-gray-300 hover:border-primary-500 bg-white/80 backdrop-blur-sm hover:bg-primary-50/50"
-            onClick={() => window.open('https://drive.google.com/drive/folders/1FnaZ_hFtoB4soxhhjO_jxe8CG9rLwC4H', '_blank')}
-            whileHover={{ scale: 1.03, boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.1)" }}
-            whileTap={{ scale: 0.97 }}
-          >
-            <Download size={18} className="mr-2.5" />
-            <span className="font-medium">{t('hero.cta.downloadApk')}</span>
-          </MotionButton>
+          {/* App download options */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+            {/* PWA Install (if available) */}
+            {isInstallable && (
+              <MotionButton 
+                variant="primary" 
+                className="rounded-xl shadow-xl flex items-center justify-center px-6 py-4 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600"
+                onClick={install}
+                whileHover={{ scale: 1.03, boxShadow: "0 20px 30px -10px rgba(79, 70, 229, 0.4)" }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <Download size={18} className="mr-2.5" />
+                <span className="font-medium">Install PWA</span>
+              </MotionButton>
+            )}
+            
+            {/* Google Play Store */}
+            <MotionButton 
+              variant={isInstallable ? "outline" : "primary"}
+              className={`rounded-xl shadow-xl flex items-center justify-center px-6 py-4 ${
+                isInstallable 
+                  ? "border-2 border-gray-300 hover:border-green-500 bg-white/80 backdrop-blur-sm hover:bg-green-50/50" 
+                  : "bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600"
+              }`}
+              onClick={() => window.open('https://play.google.com/store', '_blank')}
+              whileHover={{ scale: 1.03, boxShadow: "0 20px 30px -10px rgba(79, 70, 229, 0.4)" }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <Download size={18} className="mr-2.5" />
+              <span className="font-medium">{t('hero.cta.googlePlay')}</span>
+            </MotionButton>
+            
+            {/* Direct APK Download */}
+            <MotionButton 
+              variant="outline"
+              className="rounded-xl shadow-xl flex items-center justify-center px-6 py-4 border-2 border-green-300 hover:border-green-500 bg-white/80 backdrop-blur-sm hover:bg-green-50/50 text-green-700 hover:text-green-800"
+              onClick={handleAPKDownload}
+              whileHover={{ scale: 1.03, boxShadow: "0 10px 30px -10px rgba(34, 197, 94, 0.3)" }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <FileText size={18} className="mr-2.5" />
+              <span className="font-medium">{t('hero.cta.downloadApk')}</span>
+            </MotionButton>
+          </div>
+          
+          {/* Additional info */}
+          <div className="text-sm text-gray-600 space-y-1">
+            <p>Choose your preferred installation method</p>
+            <p className="text-xs">PWA: Web-based app • APK: Native Android app • Play Store: Official distribution</p>
+          </div>
         </motion.div>
       </div>
       
