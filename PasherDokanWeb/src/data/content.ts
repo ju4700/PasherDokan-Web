@@ -1,4 +1,4 @@
-import { TestimonialType, FeatureType, FAQType } from '../types';
+import { FeatureType, FAQType } from '../types';
 
 export const features: FeatureType[] = [
   {
@@ -50,43 +50,6 @@ export const features: FeatureType[] = [
     icon: "Zap"
   }
 ];
-
-export const testimonials: TestimonialType[] = [
-  {
-    id: 1,
-    name: "Rahman Mia",
-    role: "Shop Owner",
-    company: "Rahman General Store, Chattogram",
-    content: "পাশের দোকান আমার দোকানকে ডিজিটাল করতে এবং আমার আশেপাশের আরও বেশি গ্রাহকের কাছে পৌঁছাতে সাহায্য করেছে। ক্যাশ অন পিক-আপের সিস্টেমটা আমার কাস্টমারদের জন্য একদম পারফেক্ট।",
-    avatar: "https://images.pexels.com/photos/32191522/pexels-photo-32191522/free-photo-of-portrait-of-a-senior-man-sitting-outdoors-in-bangladesh.jpeg?auto=compress&cs=tinysrgb&w=600"
-  },
-  {
-    id: 2,
-    name: "Fatima Begum",
-    role: "SME Owner",
-    company: "Fatima's Fashion Boutique",
-    content: "OpenStreetMap দিয়ে আমার দোকানটা লোকাল কাস্টমারদের কাছে সহজেই পৌঁছায়। হাইপারলোকাল প্ল্যাটফর্মটা আমার মতো ছোট ব্যবসার জন্য পারফেক্ট।",
-    avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150"
-  },
-  {
-    id: 3,
-    name: "Mohammad Karim",
-    role: "Electronics Retailer",
-    company: "Karim Electronics, Chattogram",
-    content: "রিয়েল-টাইম প্রফিট লস ট্র্যাকিং এবং ইনভেনটরি ম্যানেজমেন্ট আমার ব্যবসায় বিপ্লব এনেছে। সাবস্ক্রিপশন মডেলটা খুবই সাশ্রয়ী।",
-    avatar: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=150"
-  },
-  {
-    id: 4,
-    name: "Nusrat Jahan",
-    role: "Bakery Owner",
-    company: "Nusrat's Bakery",
-    content: "কাস্টমার পোল ফিচারটা দিয়ে জানতে পারি কোন প্রোডাক্ট কতটা ডিমান্ড আছে। এটা আমার স্টকিং ডিসিশনে অনেক সাহায্য করে।",
-    avatar: "https://images.pexels.com/photos/15211652/pexels-photo-15211652/free-photo-of-portrait-of-woman-in-shawl-standing-on-road.jpeg?auto=compress&cs=tinysrgb&w=600"
-  }
-];
-
-// ...existing code...
 
 export const faqs: FAQType[] = [
   {

@@ -13,7 +13,7 @@ const Header: React.FC = () => {
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 50);
     
-    const sections = ['hero', 'features', 'testimonials', 'team', 'faq'];
+    const sections = ['hero', 'features', 'vision', 'team', 'faq'];
     const currentSection = sections.find(section => {
       const element = document.getElementById(section);
       if (!element) return false;
@@ -71,7 +71,7 @@ const Header: React.FC = () => {
           <nav className="hidden md:flex items-center gap-3 mx-auto bg-white/60 px-2 py-1.5 rounded-full shadow-inner border border-gray-100/50">
             <NavLink href="#features" isActive={activeSection === 'features'}>{t('nav.features')}</NavLink>
             
-            <NavLink href="#testimonials" isActive={activeSection === 'testimonials'}>{t('nav.testimonials')}</NavLink>
+            <NavLink href="#vision" isActive={activeSection === 'vision'}>{t('nav.vision')}</NavLink>
             
             <NavLink href="#faq" isActive={activeSection === 'faq'}>{t('nav.faq')}</NavLink>
             <NavLink href="#team" isActive={activeSection === 'team'}>{t('nav.team')}</NavLink>
@@ -134,8 +134,8 @@ const Header: React.FC = () => {
             <MobileNavLink href="#features" onClick={() => setIsOpen(false)} isActive={activeSection === 'features'}>
               {t('nav.features')}
             </MobileNavLink>
-            <MobileNavLink href="#testimonials" onClick={() => setIsOpen(false)} isActive={activeSection === 'testimonials'}>
-              {t('nav.testimonials')}
+            <MobileNavLink href="#vision" onClick={() => setIsOpen(false)} isActive={activeSection === 'vision'}>
+              {t('nav.vision')}
             </MobileNavLink>
             <MobileNavLink href="#team" onClick={() => setIsOpen(false)} isActive={activeSection === 'team'}>
               {t('nav.team')}

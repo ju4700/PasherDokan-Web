@@ -341,24 +341,17 @@ const CallToAction: React.FC = () => {
             >
               <SignupForm t={t} />
               
-              {/* Testimonial badge */}
-              <div className="mt-8 flex items-center p-4 rounded-xl bg-white/80 backdrop-blur border border-gray-100 shadow-sm">
-                <div className="flex -space-x-2 mr-4">
-                  {[1, 2, 3].map(i => (
-                    <div key={i} className={`w-10 h-10 rounded-full border-2 border-white bg-primary-${i*100} flex items-center justify-center text-white font-medium shadow-sm`}>
-                      {String.fromCharCode(64 + i)}
-                    </div>
-                  ))}
+              {/* Pre-launch indicator */}
+              <div className="mt-8 flex items-center p-4 rounded-xl bg-gradient-to-r from-primary-50 to-primary-100 border border-primary-200 shadow-sm">
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary-500 text-white mr-4">
+                  <Star size={20} fill="currentColor" />
                 </div>
                 <div className="flex-1">
-                  <div className="flex items-center mb-1">
-                    {[1, 2, 3, 4, 5].map(i => (
-                      <Star key={i} size={14} fill="#FBBF24" stroke="none" />
-                    ))}
-                    <span className="ml-1 text-xs text-gray-500">{t('cta.testimonialReviews')}</span>
-                  </div>
-                  <p className="text-sm text-gray-600">
-                    {t('cta.testimonialQuote')}
+                  <p className="text-sm font-medium text-primary-700 mb-1">
+                    {t('cta.preLaunchTitle')}
+                  </p>
+                  <p className="text-sm text-primary-600">
+                    {t('cta.preLaunchMessage')}
                   </p>
                 </div>
               </div>

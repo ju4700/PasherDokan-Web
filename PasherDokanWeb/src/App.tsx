@@ -9,7 +9,7 @@ import PWAInstallPrompt, { OfflineNotification } from './components/PWAInstallPr
 import AccessibilityToolbar from './components/AccessibilityToolbar';
 import { 
   LazyTeam, 
-  LazyTestimonials, 
+  LazyVisionStatement, 
   LazyFAQ
 } from './components/LazyComponents';
 import './styles/accessibility.css';
@@ -65,7 +65,7 @@ function App() {
             <Features />
             <Milestones />
             <Suspense fallback={<SectionLoader />}>
-              <LazyTestimonials />
+              <LazyVisionStatement />
             </Suspense>
             <Suspense fallback={<SectionLoader />}>
               <LazyFAQ />

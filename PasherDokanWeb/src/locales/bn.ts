@@ -2,7 +2,7 @@
 export const bn = {
   // Navigation
   'nav.features': 'ফিচারসমূহ',
-  'nav.testimonials': 'গ্রাহক মতামত',
+  'nav.vision': 'আমাদের ভিশন',
   'nav.team': 'আমাদের টিম',
   'nav.faq': 'প্রশ্নোত্তর',
   'nav.contact': 'যোগাযোগ',
@@ -68,15 +68,30 @@ export const bn = {
   'socialProof.rating': 'মার্চেন্ট রেটিং',
   'socialProof.ratingDesc': '২,৮৪৭+ মার্চেন্ট রিভিউ এর ভিত্তিতে',
 
-  // Testimonials
-  'testimonials.badge': 'গ্রাহকদের গল্প',
-  'testimonials.title': 'দোকান মালিকরা যা বলছেন',
-  'testimonials.subtitle': 'পাশের দোকানের ডিজিটাল টুলস দিয়ে উন্নতি করা স্থানীয় ব্যবসার প্রকৃত সফলতার গল্প।',
-  'testimonials.featuredStory': 'ফিচার্ড গল্প',
-  'testimonials.previousTestimonial': 'পূর্ববর্তী মতামত',
-  'testimonials.nextTestimonial': 'পরবর্তী মতামত',
-  'testimonials.swipeHint': 'সোয়াইপ বা ট্যাপ করুন',
-  'testimonials.trustedBy': 'সারা বাংলাদেশের স্থানীয় ব্যবসায়ীদের বিশ্বস্ত',
+  // Vision Statement
+  'vision.badge': 'আমাদের ভিশন',
+  'vision.title': 'বাংলাদেশের হাইপারলোকাল ভবিষ্যত',
+  'vision.subtitle': 'আমরা শুধু আরেকটি ই-কমার্স প্ল্যাটফর্ম নই। আমরা একটি ডিজিটাল ইকোসিস্টেম তৈরি করছি যা স্থানীয় দোকানদারদের ক্ষমতায়ন করে এবং প্রকৃত কমিউনিটি সংযোগগুলি সংরক্ষণ করে।',
+  'vision.mission.title': 'আমাদের মিশন',
+  'vision.mission.description': 'বাংলাদেশের স্থানীয় দোকানদারদের ডিজিটাল যুগে সমৃদ্ধ হতে সাহায্য করা এবং তাদের কমিউনিটি রুট ও গ্রাহক সম্পর্ক সংরক্ষণ করা।',
+  'vision.hyperlocal.title': 'হাইপারলোকাল ফোকাস',
+  'vision.hyperlocal.description': 'চট্টগ্রামে ১০০ পাইলট দোকানদার দিয়ে শুরু, সারা বাংলাদেশে প্রতিবেশী-ভিত্তিক বাণিজ্যের ভিত্তি তৈরি করা।',
+  'vision.market.title': 'বাজার প্রভাব',
+  'vision.market.description': '৬ বিলিয়ন ডলার সম্ভাব্য বাজার লক্ষ্য করে, এসএমইদের সাহায্য করা যারা বাংলাদেশের খুচরা ল্যান্ডস্কেপের ৮০% গঠন করে।',
+  'vision.community.title': 'কমিউনিটি প্রথম',
+  'vision.community.description': 'ক্যাশ-অন-পিকআপ ঐতিহ্য সংরক্ষণ করে ডিজিটাল সুবিধা যোগ করা - স্থানীয় গ্রাহকরা কীভাবে কেনাকাটা করতে পছন্দ করেন তা সম্মান করা।',
+  'vision.insights.title': 'বাজার অন্তর্দৃষ্টি',
+  'vision.insights.subtitle': 'কেন আমরা বাংলাদেশের এসএমই ইকোসিস্টেমের জন্য পাশের দোকান তৈরি করছি',
+  'vision.insights.sme.label': 'বাংলাদেশের খুচরা বিক্রেতা এসএমই',
+  'vision.insights.sme.description': 'বিশাল অব্যবহৃত সম্ভাবনা',
+  'vision.insights.coverage.label': 'চট্টগ্রামে দোকান কভারেজ লক্ষ্য',
+  'vision.insights.coverage.description': 'দেশব্যাপী সম্প্রসারণের আগে',
+  'vision.insights.outlets.label': 'বাংলাদেশে মোট খুচরা আউটলেট',
+  'vision.insights.outlets.description': 'আমাদের দীর্ঘমেয়াদী সুযোগ',
+  'vision.cta.title': 'বিপ্লবের অংশ হন',
+  'vision.cta.description': 'আমরা চট্টগ্রামে ১০০ জন নির্বাচিত দোকান মালিকদের সাথে আমাদের পাইলট প্রোগ্রাম চালু করছি। আপনার স্থানীয় ব্যবসা রূপান্তরিত করার জন্য প্রথমদের মধ্যে থাকতে আমাদের আর্লি অ্যাক্সেস তালিকায় যোগ দিন।',
+  'vision.cta.joinPilot': 'পাইলট প্রোগ্রামে যোগ দিন',
+  'vision.cta.learnMore': 'আরো জানুন',
 
   // Team
   'team.badge': 'আমাদের টিম',
