@@ -3,31 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Download, Star, CheckCircle, Mail, User, Building, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const AppStoreBadge: React.FC<{ platform: 'ios' | 'android', className?: string, t: (key: string) => string }> = ({ platform, className, t }) => {
-  const store = platform === 'ios' ? 'App Store' : 'Google Play';
-  const icon = platform === 'ios' ? (
-    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-      <path d="M14.94 5.19A4.38 4.38 0 0 0 16 2a4.44 4.44 0 0 0-3 1.52 4.17 4.17 0 0 0-1 3.09 3.69 3.69 0 0 0 2.94-1.42zm2.52 7.44a4.51 4.51 0 0 1 2.16-3.81 4.66 4.66 0 0 0-3.66-2c-1.56-.16-3 .91-3.83.91-.83 0-2-.89-3.3-.87a4.92 4.92 0 0 0-4.14 2.53c-1.72 3-.45 7.37 1.28 9.79.86 1.22 1.88 2.6 3.24 2.56 1.3-.05 1.77-.82 3.33-.82 1.56 0 2 .82 3.38.79 1.39-.05 2.28-1.24 3.13-2.46a10.07 10.07 0 0 0 1.4-2.87 4.4 4.4 0 0 1-2.69-4.02z"></path>
-    </svg>
-  ) : (
-    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-      <path d="m12 15.5-8.2-5.5H12V4.12L3.26 9.8a1 1 0 0 0 0 1.7l8.74 5.88V15.5zm1.06 3.89L21.8 13.8a1 1 0 0 0 0-1.61L13.06 6.5v12.89z"></path>
-    </svg>
-  );
-
-  return (
-    <div className={`flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-800 hover:bg-gray-700 border border-gray-700 transition-all cursor-pointer hover:shadow-lg hover:scale-102 duration-300 ${className}`}>
-      <div className="flex-shrink-0 w-10 h-10 rounded-md bg-gradient-to-br from-primary-500 to-primary-600 text-white flex items-center justify-center shadow-sm">
-        {icon}
-      </div>
-      <div className="flex flex-col">
-        <span className="text-xs text-gray-400">{t('cta.downloadOn')}</span>
-        <span className="font-semibold text-white">{store}</span>
-      </div>
-    </div>
-  );
-};
-
 const Tab: React.FC<{ id: string, label: string, icon: React.ReactNode, active: boolean, onClick: () => void }> = ({ label, icon, active, onClick }) => (
   <button
     onClick={onClick}
@@ -122,9 +97,13 @@ const SignupForm: React.FC<{ t: (key: string) => string }> = ({ t }) => {
               <p className="text-gray-600 mb-6">
                 {t('cta.successMessage')}
               </p>
-              <div className="flex justify-center gap-4 mt-4">
-                <AppStoreBadge platform="android" t={t} />
-                <AppStoreBadge platform="ios" t={t} />
+              <div className="bg-gradient-to-r from-primary-50 to-primary-100 rounded-lg p-4 border border-primary-200">
+                <h4 className="font-semibold text-primary-800 mb-2">What happens next?</h4>
+                <ul className="text-sm text-primary-700 space-y-1">
+                  <li>• Our team will review your application</li>
+                  <li>• You'll receive a call within 2-3 business days</li>
+                  <li>• Pilot program starts in Chattogram Q3 2025</li>
+                </ul>
               </div>
             </motion.div>
           ) : (
@@ -414,27 +393,48 @@ const CallToAction: React.FC = () => {
                   </AnimatePresence>
                 </div>
                 
-                {/* App preview */}
-                <div className="mt-10 bg-gradient-to-br from-gray-900 to-primary-900 rounded-xl p-6 overflow-hidden relative">
+                {/* Pilot program preview */}
+                <div className="mt-10 bg-gradient-to-br from-primary-600 to-primary-800 rounded-xl p-6 overflow-hidden relative">
                   <div className="absolute inset-0 bg-grid-pattern-light opacity-[0.03]"></div>
                   
                   <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="text-white max-w-md">
-                      <h3 className="text-xl font-bold mb-3">{t('cta.downloadMobileApp')}</h3>
-                      <p className="text-gray-300 mb-6">{t('cta.mobileAppDescription')}</p>
+                      <h3 className="text-xl font-bold mb-3">{t('cta.earlyAccess')}</h3>
+                      <p className="text-primary-100 mb-6">{t('cta.pilotDescription')}</p>
                       
-                      <div className="flex flex-col sm:flex-row gap-4">
-                        <AppStoreBadge platform="android" t={t} />
-                        <AppStoreBadge platform="ios" t={t} />
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 bg-white rounded-full"></div>
+                          <span className="text-primary-100">Exclusive early access to platform</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 bg-white rounded-full"></div>
+                          <span className="text-primary-100">Personalized onboarding support</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 bg-white rounded-full"></div>
+                          <span className="text-primary-100">Discounted subscription rates</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 bg-white rounded-full"></div>
+                          <span className="text-primary-100">Direct feedback to development team</span>
+                        </div>
                       </div>
                     </div>
                     
                     <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary-600 to-primary-400 rounded-xl blur-2xl opacity-30"></div>
-                      <div className="relative bg-gray-800 border-4 border-gray-700 rounded-3xl overflow-hidden w-56 h-96">
-                        <div className="h-4 w-20 bg-black absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-lg z-10"></div>
-                        <div className="bg-gradient-to-br from-primary-600 to-primary-800 h-full w-full">
-                          {/* Mock app interface could be placed here */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-white/10 rounded-xl blur-2xl opacity-30"></div>
+                      <div className="relative bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-6 w-72">
+                        <div className="text-center">
+                          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Star size={28} className="text-white" />
+                          </div>
+                          <h4 className="text-white font-bold text-lg mb-2">Pilot Program</h4>
+                          <p className="text-primary-100 text-sm mb-4">Join 100 exclusive partner shops in Chattogram</p>
+                          <div className="bg-white/10 rounded-lg p-3">
+                            <div className="text-2xl font-bold text-white">100</div>
+                            <div className="text-xs text-primary-100">Partner Shops Target</div>
+                          </div>
                         </div>
                       </div>
                     </div>
