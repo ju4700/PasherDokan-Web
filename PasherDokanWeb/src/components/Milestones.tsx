@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   Target, 
@@ -12,8 +12,7 @@ import {
   BarChart3,
   Calendar,
   Award,
-  Building2,
-  AlertTriangle
+  Building2
 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -45,7 +44,6 @@ interface FuturePlan {
 
 const Milestones: React.FC = () => {
   const { t } = useLanguage();
-  const [activeStep, setActiveStep] = useState(1);
 
   const milestones: Milestone[] = [
     {
@@ -184,197 +182,150 @@ const Milestones: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-primary-50/30 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-primary-100/20 via-transparent to-transparent"></div>
-      <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-primary-200/30 to-secondary-200/30 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-secondary-200/30 to-primary-200/30 rounded-full blur-3xl"></div>
+    <section id="milestones" className="py-28 bg-gradient-to-b from-white to-primary-50/30 relative overflow-hidden">
+      {/* Background decorative elements - matching Features component */}
+      <div className="absolute top-40 right-0 w-96 h-96 bg-primary-100/30 rounded-full opacity-60 blur-3xl -z-10"></div>
+      <div className="absolute bottom-40 left-0 w-96 h-96 bg-secondary-100/30 rounded-full opacity-60 blur-3xl -z-10"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="inline-block py-2 px-6 rounded-full bg-gradient-to-r from-primary-100 to-primary-50 border border-primary-200 text-primary-800 font-semibold text-sm mb-6"
-          >
-            {t('milestones.badge') || 'Our Roadmap'}
-          </motion.span>
-          
-          <motion.h2
+        {/* Header - matching Features component style */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight"
+            transition={{ duration: 0.6 }}
+            className="inline-block"
           >
-            {t('milestones.title') || 'Project Milestones & Future Plans'}
+            <span className="py-1.5 px-5 bg-primary-50 text-primary-700 font-semibold text-sm rounded-full shadow-sm border border-primary-100/50 inline-block mb-3">
+              {t('milestones.badge') || 'Our Roadmap'}
+            </span>
+          </motion.div>
+          
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-900"
+          >
+            {t('milestones.title') || 'Project Milestones'} <span className="text-primary-600 relative">
+              {t('milestones.titleSecond') || '& Future Plans'}
+            </span>
           </motion.h2>
           
-          <motion.p
+          <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-gray-600 leading-relaxed"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg text-gray-600 leading-relaxed"
           >
             {t('milestones.subtitle') || 'A strategic, phased approach to building Bangladesh\'s leading hyperlocal e-commerce platform'}
           </motion.p>
         </div>
 
-        {/* Milestones Timeline */}
-        <div className="mb-20">
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl font-bold text-gray-900 mb-8 text-center"
-          >
-            {t('milestones.milestonesTitle') || 'Development Milestones'}
-          </motion.h3>
+        {/* Milestones Grid - using Features component layout pattern */}
+        <div className="mb-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {milestones.map((milestone, index) => (
+              <motion.div
+                key={milestone.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group relative bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
+                {/* Icon matching Features component style */}
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center text-primary-600 shadow-md relative group-hover:scale-105 transition-transform duration-300 mb-6">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-primary-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                  <div className="relative z-10">
+                    {milestone.icon}
+                  </div>
+                </div>
 
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary-200 via-primary-300 to-gray-200 rounded-full hidden lg:block"></div>
-            
-            <div className="space-y-8 lg:space-y-12">
-              {milestones.map((milestone, index) => (
-                <motion.div
-                  key={milestone.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`flex flex-col lg:flex-row items-center gap-8 ${
-                    index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                  }`}
-                  onMouseEnter={() => setActiveStep(milestone.step)}
-                >
-                  {/* Content Card */}
-                  <div className={`flex-1 ${index % 2 === 0 ? 'lg:text-right' : 'lg:text-left'}`}>
-                    <div className={`bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 ${
-                      activeStep === milestone.step ? 'scale-105 shadow-primary-500/20' : ''
-                    }`}>
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${getStatusColor(milestone.status)}`}>
-                          {milestone.icon}
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-sm font-medium text-gray-500">Step {milestone.step}</span>
-                            <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(milestone.status)}`}>
-                              {getStatusIcon(milestone.status)}
-                              <span className="capitalize">{milestone.status.replace('-', ' ')}</span>
-                            </div>
-                          </div>
-                          <h4 className="text-xl font-bold text-gray-900">{milestone.title}</h4>
-                        </div>
-                      </div>
-                      
-                      <p className="text-gray-600 mb-6">{milestone.description}</p>
-                      
-                      {/* Professional Details */}
-                      <div className="bg-gray-50 rounded-xl p-4 mb-6">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Calendar className="w-4 h-4 text-gray-600" />
-                          <span className="text-sm font-medium text-gray-700">Timeline</span>
-                        </div>
-                        <p className="text-sm text-gray-900 font-semibold">{milestone.timeline}</p>
-                        {milestone.startDate && (
-                          <p className="text-xs text-gray-600 mt-1">Start: {milestone.startDate}</p>
-                        )}
-                      </div>
+                {/* Status and Step */}
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-sm font-medium text-gray-500">Step {milestone.step}</span>
+                  <div className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(milestone.status)}`}>
+                    {getStatusIcon(milestone.status)}
+                    <span className="capitalize">{milestone.status.replace('-', ' ')}</span>
+                  </div>
+                </div>
 
-                      {/* Key Metrics */}
-                      <div className="mb-6">
-                        <div className="flex items-center gap-2 mb-3">
-                          <BarChart3 className="w-4 h-4 text-gray-600" />
-                          <span className="text-sm font-medium text-gray-700">Key Performance Indicators</span>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                          {milestone.keyMetrics.map((metric, idx) => (
-                            <div key={idx} className="flex items-center gap-2 text-xs">
-                              <div className="w-1.5 h-1.5 bg-primary-500 rounded-full"></div>
-                              <span className="text-gray-600">{metric}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                <h3 className="text-xl font-semibold mb-4 group-hover:text-primary-600 transition-colors">
+                  {milestone.title}
+                </h3>
+                
+                <p className="text-gray-600 leading-relaxed mb-6">
+                  {milestone.description}
+                </p>
+                
+                {/* Timeline */}
+                <div className="bg-gray-50 rounded-xl p-4 mb-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Calendar className="w-4 h-4 text-gray-600" />
+                    <span className="text-sm font-medium text-gray-700">Timeline</span>
+                  </div>
+                  <p className="text-sm text-gray-900 font-semibold">{milestone.timeline}</p>
+                </div>
 
-                      {/* Risk Assessment */}
-                      <div className="mb-6">
-                        <div className="flex items-center gap-2 mb-3">
-                          <AlertTriangle className="w-4 h-4 text-orange-600" />
-                          <span className="text-sm font-medium text-gray-700">Risk Factors</span>
-                        </div>
-                        <div className="space-y-1">
-                          {milestone.risks.map((risk, idx) => (
-                            <div key={idx} className="flex items-center gap-2 text-xs">
-                              <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
-                              <span className="text-gray-600">{risk}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Target className="w-4 h-4 text-primary-600" />
-                          <span className="text-primary-600 font-semibold">{milestone.target}</span>
-                        </div>
-                        {milestone.status === 'in-progress' && milestone.progress && (
-                          <div className="flex items-center gap-2">
-                            <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                              <div 
-                                className="h-full bg-gradient-to-r from-primary-500 to-primary-600 rounded-full transition-all duration-1000"
-                                style={{ width: `${milestone.progress}%` }}
-                              ></div>
-                            </div>
-                            <span className="text-sm text-gray-500">{milestone.progress}%</span>
-                          </div>
-                        )}
-                      </div>
+                {/* Progress bar for in-progress items */}
+                {milestone.status === 'in-progress' && milestone.progress && (
+                  <div className="mb-6">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-gray-700">Progress</span>
+                      <span className="text-sm text-gray-500">{milestone.progress}%</span>
+                    </div>
+                    <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-primary-500 to-primary-600 rounded-full transition-all duration-1000"
+                        style={{ width: `${milestone.progress}%` }}
+                      ></div>
                     </div>
                   </div>
-
-                  {/* Timeline Node */}
-                  <div className="relative z-10 hidden lg:block">
-                    <div className={`w-16 h-16 rounded-full border-4 flex items-center justify-center transition-all duration-300 ${
-                      milestone.status === 'completed' ? 'bg-green-500 border-green-200' :
-                      milestone.status === 'in-progress' ? 'bg-blue-500 border-blue-200' :
-                      'bg-gray-300 border-gray-200'
-                    } ${activeStep === milestone.step ? 'scale-110 shadow-lg' : ''}`}>
-                      <span className="text-white font-bold text-lg">{milestone.step}</span>
-                    </div>
+                )}
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Target className="w-4 h-4 text-primary-600" />
+                    <span className="text-primary-600 font-semibold">{milestone.target}</span>
                   </div>
-
-                  {/* Spacer for alternate layout */}
-                  <div className="flex-1 hidden lg:block"></div>
-                </motion.div>
-              ))}
-            </div>
+                  
+                  {/* Subtle highlight effect when hovered - from Features */}
+                  <div className={`absolute inset-0 bg-gradient-to-br from-primary-50/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none`}></div>
+                  
+                  {/* Feature number indicator - from Features */}
+                  <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center text-xs font-bold text-gray-400 group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors">
+                    {milestone.step}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
 
-        {/* Future Plans */}
-        <div className="mt-20">
+        {/* Future Plans - using similar grid layout */}
+        <div className="mt-24">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">
-              {t('futurePlans.title') || 'Future Plans & Features'}
+            <span className="py-1.5 px-5 bg-secondary-50 text-secondary-700 font-semibold text-sm rounded-full shadow-sm border border-secondary-100/50 inline-block mb-3">
+              {t('futurePlans.badge') || 'Future Vision'}
+            </span>
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {t('futurePlans.title') || 'Future Plans'} <span className="text-secondary-600">& Features</span>
             </h3>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               {t('futurePlans.subtitle') || 'Ambitious plans to enhance and expand the platform beyond our initial milestones'}
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {futurePlans.map((plan, index) => (
               <motion.div
                 key={plan.id}
@@ -382,7 +333,7 @@ const Milestones: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="group bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative"
               >
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getCategoryColor(plan.category)} text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   {plan.icon}
@@ -423,45 +374,17 @@ const Milestones: React.FC = () => {
                     {plan.category}
                   </span>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-500">View Details</span>
+                    <span className="text-xs text-gray-500">Learn More</span>
                     <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-all" />
                   </div>
                 </div>
+
+                {/* Highlight effect - from Features */}
+                <div className={`absolute inset-0 bg-gradient-to-br from-secondary-50/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none`}></div>
               </motion.div>
             ))}
           </div>
         </div>
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-20 text-center"
-        >
-          <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-3xl p-8 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-8 -translate-x-8"></div>
-            
-            <div className="relative">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                {t('milestones.cta.title') || 'Be Part of the Journey'}
-              </h3>
-              <p className="text-primary-100 mb-8 max-w-2xl mx-auto">
-                {t('milestones.cta.description') || 'Join us as we build Bangladesh\'s future of hyperlocal commerce. Every milestone brings us closer to empowering millions of SMEs.'}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-white text-primary-600 px-8 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors shadow-lg">
-                  {t('milestones.cta.joinWaitlist') || 'Join Waitlist'}
-                </button>
-                <button className="border-2 border-white text-white px-8 py-3 rounded-xl font-semibold hover:bg-white/10 transition-colors">
-                  {t('milestones.cta.learnMore') || 'Learn More'}
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

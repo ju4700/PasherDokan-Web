@@ -179,6 +179,13 @@ const Footer: React.FC = () => {
                   <a href="#" className="text-gray-500 hover:text-primary-600 transition-colors">Privacy Policy</a>
                   <a href="#" className="text-gray-500 hover:text-primary-600 transition-colors">Terms of Service</a>
                   <a href="#" className="text-gray-500 hover:text-primary-600 transition-colors">Cookie Policy</a>
+                  <a 
+                    href="/seodashboard" 
+                    className="text-gray-400 hover:text-primary-500 transition-colors text-xs"
+                    title="SEO Analytics Dashboard"
+                  >
+                    Analytics
+                  </a>
                 </div>
               </div>
               

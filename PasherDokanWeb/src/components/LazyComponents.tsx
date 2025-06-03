@@ -6,4 +6,3 @@ export const LazyVisionStatement = lazy(() => import('./VisionStatement'));
 export const LazyFAQ = lazy(() => import('./FAQ'));
 export const LazyAccessibilityToolbar = lazy(() => import('./AccessibilityToolbar'));
 export const LazyPWAInstallPrompt = lazy(() => import('./PWAInstallPrompt'));
-export const LazySocialProof = lazy(() => import('./SocialProof'));

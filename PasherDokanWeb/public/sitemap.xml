@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+                           http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://pasherdokan.shop/</loc>
+    <lastmod>2025-06-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pasherdokan.shop/" />
+    <xhtml:link rel="alternate" hreflang="bn" href="https://pasherdokan.shop/?lang=bn" />
+  </url>
+
+  <!-- Features Page -->
+  <url>
+    <loc>https://pasherdokan.shop/#features</loc>
+    <lastmod>2025-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pasherdokan.shop/#features" />
+    <xhtml:link rel="alternate" hreflang="bn" href="https://pasherdokan.shop/?lang=bn#features" />
+  </url>
+
+  <!-- Team Page -->
+  <url>
+    <loc>https://pasherdokan.shop/#team</loc>
+    <lastmod>2025-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pasherdokan.shop/#team" />
+    <xhtml:link rel="alternate" hreflang="bn" href="https://pasherdokan.shop/?lang=bn#team" />
+  </url>
+
+  <!-- Contact Page -->
+  <url>
+    <loc>https://pasherdokan.shop/#contact</loc>
+    <lastmod>2025-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pasherdokan.shop/#contact" />
+    <xhtml:link rel="alternate" hreflang="bn" href="https://pasherdokan.shop/?lang=bn#contact" />
+  </url>
+
+  <!-- FAQ Section -->
+  <url>
+    <loc>https://pasherdokan.shop/#faq</loc>
+    <lastmod>2025-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pasherdokan.shop/#faq" />
+    <xhtml:link rel="alternate" hreflang="bn" href="https://pasherdokan.shop/?lang=bn#faq" />
+  </url>
+
+  <!-- Vision Section -->
+  <url>
+    <loc>https://pasherdokan.shop/#vision</loc>
+    <lastmod>2025-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pasherdokan.shop/#vision" />
+    <xhtml:link rel="alternate" hreflang="bn" href="https://pasherdokan.shop/?lang=bn#vision" />
+  </url>
+
+  <!-- Milestones Section -->
+  <url>
+    <loc>https://pasherdokan.shop/#milestones</loc>
+    <lastmod>2025-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pasherdokan.shop/#milestones" />
+    <xhtml:link rel="alternate" hreflang="bn" href="https://pasherdokan.shop/?lang=bn#milestones" />
+  </url>
+
+  <!-- APK Download -->
+  <url>
+    <loc>https://pasherdokan.shop/apk/pasherdokan.apk</loc>
+    <lastmod>2025-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

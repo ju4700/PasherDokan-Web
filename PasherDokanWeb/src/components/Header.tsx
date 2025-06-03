@@ -86,7 +86,7 @@ const Header: React.FC = () => {
               variant="primary" 
               size="sm"
               className="rounded-full shadow-md hover:shadow-lg transition-all hover:shadow-primary-400/20 relative overflow-hidden group"
-              onClick={() => window.open('https://expo.dev/artifacts/eas/89xfBQHPfuyv9zbhuSCred.apk', '_blank')}
+              onClick={() => window.open('https://drive.google.com/drive/folders/1URiEk_CPlfrG2xZ8q5X92G85qANrEsI7', '_blank')}
             >
               <span className="relative z-10">{t('nav.getStarted')}</span>
               <span className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>

@@ -1,0 +1,40 @@
+# Robots.txt for PasherDokan
+# https://pasherdokan.shop/robots.txt
+
+User-agent: *
+Allow: /
+
+# Prioritize important pages
+Allow: /features
+Allow: /team  
+Allow: /contact
+Allow: /images/
+Allow: /apk/
+
+# Block unnecessary paths
+Disallow: /src/
+Disallow: /*.json$
+Disallow: /*.ts$
+Disallow: /*.tsx$
+Disallow: /node_modules/
+
+# Sitemap location
+Sitemap: https://pasherdokan.shop/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1
+
+# Specific bot instructions
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
