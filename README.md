@@ -22,11 +22,4 @@ This website is built using:
 - TailwindCSS for styling
 - Various React libraries for enhanced functionality
 
-To start development:
-
-```bash
-npm install
-npm run dev
-```
-
 © 2025 PasherDokan. All rights reserved.
