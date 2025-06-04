@@ -423,7 +423,7 @@ const Hero: React.FC = () => {
             </motion.div>
             
             {/* Right Feature Cards */}
-            <div className="hidden lg:block relative z-20">
+            <div className="hidden lg:block relative z-20 pl-12">
               <motion.div 
                 style={{ y: float2Y }}
                 className="bg-white p-4 rounded-xl shadow-xl border border-gray-100 w-60 mb-8"

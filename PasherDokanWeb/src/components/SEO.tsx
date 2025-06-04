@@ -76,8 +76,8 @@ const SEO: React.FC<SEOProps> = ({ seoData = {}, structuredData, children }) => 
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="theme-color" content="#14b8a6" />
-        <meta name="msapplication-navbutton-color" content="#14b8a6" />
+        <meta name="theme-color" content="#648DDB" />
+        <meta name="msapplication-navbutton-color" content="#648DDB" />
         <meta name="apple-mobile-web-app-title" content="PasherDokan" />
 
         {/* Performance and Caching */}

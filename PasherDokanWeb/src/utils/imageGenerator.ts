@@ -15,8 +15,8 @@ export const generateOGImages = async () => {
       name: 'features',
       title: 'PasherDokan Features',
       subtitle: 'Complete Digital Commerce Solution',
-      primaryColor: '#0d9488', // teal-600
-      bgGradient: 'linear-gradient(135deg, #0f766e 0%, #0d9488 100%)'
+      primaryColor: '#648DDB', // custom primary
+      bgGradient: 'linear-gradient(135deg, #4f46e5 0%, #648DDB 100%)'
     },
     {
       name: 'team',

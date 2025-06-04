@@ -70,7 +70,8 @@ const translations = {
     
     // Milestones
     'milestones.badge': 'Our Roadmap',
-    'milestones.title': 'Project Milestones & Future Plans',
+    'milestones.title': 'Project Milestones',
+    'milestones.titleSecond': '& Future Plans',
     'milestones.subtitle': 'A strategic, phased approach to building Bangladesh\'s leading hyperlocal e-commerce platform',
     'milestones.milestonesTitle': 'Development Milestones',
     'milestones.step1.title': 'Focus on Shopkeepers',
@@ -85,6 +86,9 @@ const translations = {
     'milestones.cta.description': 'Join us as we build Bangladesh\'s future of hyperlocal commerce. Every milestone brings us closer to empowering millions of SMEs.',
     'milestones.cta.joinWaitlist': 'Join Waitlist',
     'milestones.cta.learnMore': 'Learn More',
+    
+    // Future Plans
+    'futurePlans.badge': 'Future Vision',
     'futurePlans.title': 'Future Plans & Features',
     'futurePlans.subtitle': 'Ambitious plans to enhance and expand the platform beyond our initial milestones',
     'futurePlans.shopkeeperRetailer.title': 'Shopkeeper-Retailer Connections',
@@ -271,7 +275,8 @@ const translations = {
     
     // Milestones - Bengali
     'milestones.badge': 'আমাদের রোডম্যাপ',
-    'milestones.title': 'প্রকল্পের মাইলফলক ও ভবিষ্যৎ পরিকল্পনা',
+    'milestones.title': 'প্রকল্পের মাইলফলক',
+    'milestones.titleSecond': 'ও ভবিষ্যৎ পরিকল্পনা',
     'milestones.subtitle': 'বাংলাদেশের শীর্ষস্থানীয় হাইপারলোকাল ই-কমার্স প্ল্যাটফর্ম তৈরির জন্য একটি কৌশলগত, পর্যায়ক্রমিক পদ্ধতি',
     'milestones.milestonesTitle': 'ডেভেলপমেন্ট মাইলফলক',
     'milestones.step1.title': 'দোকানদারদের উপর ফোকাস',
@@ -286,6 +291,9 @@ const translations = {
     'milestones.cta.description': 'বাংলাদেশের হাইপারলোকাল বাণিজ্যের ভবিষ্যৎ গড়ায় আমাদের সাথে যোগ দিন। প্রতিটি মাইলফলক আমাদের লাখো এসএমইকে ক্ষমতায়নের কাছাকাছি নিয়ে আসে।',
     'milestones.cta.joinWaitlist': 'ওয়েটলিস্টে যোগ দিন',
     'milestones.cta.learnMore': 'আরও জানুন',
+    
+    // Future Plans - Bengali
+    'futurePlans.badge': 'ভবিষ্যৎ দর্শন',
     'futurePlans.title': 'ভবিষ্যৎ পরিকল্পনা ও ফিচার',
     'futurePlans.subtitle': 'আমাদের প্রাথমিক মাইলফলকগুলির বাইরে প্ল্যাটফর্ম উন্নত ও সম্প্রসারণের উচ্চাভিলাষী পরিকল্পনা',
     'futurePlans.shopkeeperRetailer.title': 'দোকানদার-খুচরা বিক্রেতা সংযোগ',

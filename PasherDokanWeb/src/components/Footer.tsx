@@ -1,5 +1,5 @@
 import React from 'react';
-import { Twitter, Instagram, Linkedin, Facebook, ChevronRight, Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
+import { Twitter, Instagram, Linkedin, Facebook, ChevronRight, Mail, MapPin, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer: React.FC = () => {
@@ -152,19 +152,6 @@ const Footer: React.FC = () => {
                       </a>
                     </div>
                   </div>
-                  
-                  <div className="flex items-center group">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-primary-50 to-primary-100 flex items-center justify-center text-primary-600 mr-4 flex-shrink-0 group-hover:shadow-md transition-shadow">
-                      <Phone size={16} />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-gray-800">{t('footer.phone')}</p>
-                      <a href="tel:+8801234567890" className="text-sm text-gray-600 hover:text-primary-600 transition-colors flex items-center gap-1 mt-1">
-                        +880 123 456 7890
-                        <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </a>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -179,22 +166,9 @@ const Footer: React.FC = () => {
                   <a href="#" className="text-gray-500 hover:text-primary-600 transition-colors">Privacy Policy</a>
                   <a href="#" className="text-gray-500 hover:text-primary-600 transition-colors">Terms of Service</a>
                   <a href="#" className="text-gray-500 hover:text-primary-600 transition-colors">Cookie Policy</a>
-                  <a 
-                    href="/seodashboard" 
-                    className="text-gray-400 hover:text-primary-500 transition-colors text-xs"
-                    title="SEO Analytics Dashboard"
-                  >
-                    Analytics
-                  </a>
                 </div>
               </div>
-              
               <div className="flex items-center gap-4">
-                <select className="bg-white/90 backdrop-blur-sm rounded-xl py-2 px-4 text-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-300 shadow-sm transition-all hover:shadow-md">
-                  <option value="en">🇺🇸 English</option>
-                  <option value="bn">🇧🇩 Bengali</option>
-                </select>
-                
                 <div className="text-xs text-gray-500">
                   {t('footer.madeWithLove')}
                 </div>

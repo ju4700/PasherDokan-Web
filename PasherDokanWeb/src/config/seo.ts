@@ -11,7 +11,7 @@ export const SEO_CONFIG = {
     language: 'en',
     locale: 'en_US',
     alternateLocale: 'bn_BD',
-    themeColor: '#2563eb',
+    themeColor: '#648DDB',
     backgroundColor: '#ffffff'
   },
 
