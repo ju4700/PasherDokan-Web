@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { ChevronDown, Search, MessageCircleQuestion, HelpCircle, ExternalLink, ArrowRight, Filter, CheckCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -15,7 +15,7 @@ export default function FAQ() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   
   // FAQ data using translation keys
-  const faqs = [
+  const faqs = useMemo(() => [
     {
       id: 1,
       question: t('faq.question1'),
@@ -64,7 +64,7 @@ export default function FAQ() {
       answer: t('faq.answer8'),
       category: 'general'
     }
-  ];
+  ], [t]);
   
   const [filteredFAQs, setFilteredFAQs] = useState(faqs);
   

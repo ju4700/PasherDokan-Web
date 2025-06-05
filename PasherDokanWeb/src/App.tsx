@@ -80,8 +80,7 @@ function App() {
     // Optimize images for SEO
     optimizeImages();
     
-    // Update page title with consistent branding
-    document.title = "PasherDokan - Digital Solutions for Local Shops";
+    // Note: Document title is now managed by SEOHead component for better SEO control
     
     // Smooth scroll for anchor links with offset for floating header
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -219,9 +218,7 @@ function App() {
               </SectionSEO>
             </Suspense>
             <Suspense fallback={<SectionLoader />}>
-              <SectionSEO sectionId="team" seoKey="team" trackingEvent="Team Section View">
-                <LazyTeam />
-              </SectionSEO>
+              <LazyTeam />
             </Suspense>
             <Suspense fallback={<SectionLoader />}>
               <SectionSEO sectionId="contact" seoKey="contact" trackingEvent="Contact Section View">
