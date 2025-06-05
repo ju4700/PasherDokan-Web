@@ -168,11 +168,7 @@ const Footer: React.FC = () => {
                   <a href="#" className="text-gray-500 hover:text-primary-600 transition-colors">Cookie Policy</a>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="text-xs text-gray-500">
-                  {t('footer.madeWithLove')}
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
