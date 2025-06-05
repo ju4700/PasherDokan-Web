@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Search, MessageCircleQuestion, HelpCircle, ExternalLink, ArrowRight, Filter, CheckCircle } from 'lucide-react';
-import { faqs } from '../data/content';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -14,6 +13,59 @@ export default function FAQ() {
   const { t } = useLanguage();
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  
+  // FAQ data using translation keys
+  const faqs = [
+    {
+      id: 1,
+      question: t('faq.question1'),
+      answer: t('faq.answer1'),
+      category: 'general'
+    },
+    {
+      id: 2,
+      question: t('faq.question2'),
+      answer: t('faq.answer2'),
+      category: 'payments'
+    },
+    {
+      id: 3,
+      question: t('faq.question3'),
+      answer: t('faq.answer3'),
+      category: 'payments'
+    },
+    {
+      id: 4,
+      question: t('faq.question4'),
+      answer: t('faq.answer4'),
+      category: 'general'
+    },
+    {
+      id: 5,
+      question: t('faq.question5'),
+      answer: t('faq.answer5'),
+      category: 'general'
+    },
+    {
+      id: 6,
+      question: t('faq.question6'),
+      answer: t('faq.answer6'),
+      category: 'general'
+    },
+    {
+      id: 7,
+      question: t('faq.question7'),
+      answer: t('faq.answer7'),
+      category: 'general'
+    },
+    {
+      id: 8,
+      question: t('faq.question8'),
+      answer: t('faq.answer8'),
+      category: 'general'
+    }
+  ];
+  
   const [filteredFAQs, setFilteredFAQs] = useState(faqs);
   
   const categories: FAQCategory[] = [
@@ -42,7 +94,7 @@ export default function FAQ() {
     }
     
     setFilteredFAQs(results);
-  }, [searchQuery, activeCategory]);
+  }, [searchQuery, activeCategory, faqs]);
   
   const toggleFAQ = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -220,25 +272,6 @@ export default function FAQ() {
                             <div className="pl-11 border-l-2 border-primary-100">
                               <div className="bg-gradient-to-r from-gray-50 to-white p-4 rounded-lg">
                                 <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
-                                
-                                {/* Optional: Helper links or related questions */}
-                                {faq.helpfulLinks && (
-                                  <div className="mt-4 pt-4 border-t border-gray-100">
-                                    <h4 className="text-sm font-semibold mb-3 text-gray-700">Related Resources</h4>
-                                    <div className="flex flex-wrap gap-2">
-                                      {faq.helpfulLinks.map((link, i) => (
-                                        <a 
-                                          key={i} 
-                                          href={link.url} 
-                                          className="text-sm py-1.5 px-3 bg-white rounded-lg border border-gray-100 text-primary-600 hover:bg-primary-50 hover:border-primary-100 transition-colors flex items-center gap-1.5 shadow-sm"
-                                        >
-                                          <span>{link.text}</span>
-                                          <ExternalLink size={12} />
-                                        </a>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
                               </div>
                             </div>
                           </div>

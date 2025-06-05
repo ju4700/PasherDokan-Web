@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { MapPin, Wallet, Store, Smartphone, ShieldCheck, BarChart3, Truck, Zap, ArrowRight } from 'lucide-react';
-import { features } from '../data/content';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -29,6 +28,58 @@ const FeatureIcon: React.FC<{ icon: string }> = ({ icon }) => {
 const Features: React.FC = () => {
   const { t } = useLanguage();
   const [hovered, setHovered] = useState<number | null>(null);
+  
+  // Features data using translation keys
+  const features = [
+    {
+      id: 1,
+      title: t('features.hyperlocal.title'),
+      description: t('features.hyperlocal.description'),
+      icon: "MapPin"
+    },
+    {
+      id: 2,
+      title: t('features.cashPickup.title'),
+      description: t('features.cashPickup.description'),
+      icon: "Wallet"
+    },
+    {
+      id: 3,
+      title: t('features.smeEmpowerment.title'),
+      description: t('features.smeEmpowerment.description'),
+      icon: "Store"
+    },
+    {
+      id: 4,
+      title: t('features.analytics.title'),
+      description: t('features.analytics.description'),
+      icon: "BarChart3"
+    },
+    {
+      id: 5,
+      title: t('features.delivery.title'),
+      description: t('features.delivery.description'),
+      icon: "Truck"
+    },
+    {
+      id: 6,
+      title: t('features.polls.title'),
+      description: t('features.polls.description'),
+      icon: "BarChart3"
+    },
+    {
+      id: 7,
+      title: t('features.platform.title'),
+      description: t('features.platform.description'),
+      icon: "Smartphone"
+    },
+    {
+      id: 8,
+      title: t('features.subscription.title'),
+      description: t('features.subscription.description'),
+      icon: "Zap"
+    }
+  ];
   
   return (
     <section id="features" className="py-28 bg-gradient-to-b from-white to-primary-50/30 relative overflow-hidden">

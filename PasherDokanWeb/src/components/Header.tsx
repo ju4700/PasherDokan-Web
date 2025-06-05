@@ -56,7 +56,10 @@ const Header: React.FC = () => {
           </button>
 
           {/* Enhanced logo with improved animation */}
-          <a href="#" className="flex items-center gap-2 group pt-0.5 transition-all duration-300">
+          <button 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center gap-2 group pt-0.5 transition-all duration-300 cursor-pointer"
+          >
             <img 
               src="/images/icon.png" 
               alt="PasherDokan Logo" 
@@ -65,7 +68,7 @@ const Header: React.FC = () => {
             <span className="text-lg font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent hidden md:block transition-all group-hover:tracking-wide">
               <span className="opacity-90 hover:opacity-100"></span><span className="font-extrabold">PasherDokan</span>
             </span>
-          </a>
+          </button>
 
           {/* Desktop navigation with enhanced styling */}
           <nav className="hidden md:flex items-center gap-3 mx-auto bg-white/60 px-2 py-1.5 rounded-full shadow-inner border border-gray-100/50">

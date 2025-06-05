@@ -45,7 +45,7 @@ const Tab: React.FC<{ id: string, label: string, icon: React.ReactNode, active: 
   </button>
 );
 
-const generateRandomMarkers = (centerLat: number, centerLng: number, count: number) => {
+  const generateRandomMarkers = (centerLat: number, centerLng: number, count: number) => {
   const markers = [];
   
   const storeTypes = [
@@ -71,8 +71,9 @@ const generateRandomMarkers = (centerLat: number, centerLng: number, count: numb
   });
   
   for (let i = 0; i < count; i++) {
-    const latOffset = (Math.random() - 0.5) * 0.03;
-    const lngOffset = (Math.random() - 0.5) * 0.03;
+    // Medium spread for zoomed in view - zoom level 17 with more spread
+    const latOffset = (Math.random() - 0.5) * 0.008;
+    const lngOffset = (Math.random() - 0.5) * 0.008;
     
     const storeInfo = storeTypes[Math.floor(Math.random() * storeTypes.length)];
     
@@ -90,6 +91,7 @@ const Hero: React.FC = () => {
   const { t } = useLanguage();
   const { install, isInstallable } = usePWA();
   const [activeTab, setActiveTab] = useState('shopOwners');
+  const [mapKey, setMapKey] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
   const isPhoneInView = useInView(mockupRef, { once: true });
@@ -126,6 +128,11 @@ const Hero: React.FC = () => {
     
     return () => clearInterval(interval);
   }, [float1Y, float2Y, float3Y]);
+
+  // Force map re-render on mount
+  useEffect(() => {
+    setMapKey(prev => prev + 1);
+  }, []);
 
   const contentVariants = {
     hidden: { opacity: 0 },
@@ -263,7 +270,7 @@ const Hero: React.FC = () => {
           </motion.p>
         </motion.div>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Tabbed navigation for different user types */}
           <motion.div 
             initial="hidden"
@@ -289,14 +296,14 @@ const Hero: React.FC = () => {
             </motion.div>
           </motion.div>
           
-          {/* App Showcase with Phone in Center */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-            {/* Left Feature Cards */}
-            <div className="hidden lg:block relative z-20">
+          {/* App Showcase with Monitor and Floating Cards */}
+          <div className="relative">
+            {/* Left Feature Cards - Absolutely Positioned */}
+            <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 z-50" style={{ left: '-150px' }}>
               <motion.div 
                 style={{ y: float1Y }}
-                className="bg-white p-4 rounded-xl shadow-xl border border-gray-100 w-60 mb-8 ml-auto"
-                initial={{ opacity: 0, x: -20 }}
+                className="bg-white p-4 rounded-xl shadow-xl border border-gray-100 w-64 mb-8 relative z-50"
+                initial={{ opacity: 0, x: -150 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.8 }}
               >
@@ -313,7 +320,7 @@ const Hero: React.FC = () => {
               
               <motion.div 
                 style={{ y: float3Y }}
-                className="bg-white/90 backdrop-blur-md rounded-xl shadow-xl border border-gray-100 p-4 w-60 ml-auto"
+                className="bg-white/90 backdrop-blur-md rounded-xl shadow-xl border border-gray-100 p-4 w-64 relative z-50"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.5 }}
@@ -330,90 +337,96 @@ const Hero: React.FC = () => {
               </motion.div>
             </div>
             
-            {/* Center Phone - Increased height */}
+            {/* Center Monitor - Properly Centered */}
             <motion.div 
               ref={mockupRef}
               variants={phoneVariants}
               initial="hidden"
               animate={isPhoneInView ? "visible" : "hidden"}
-              className="relative z-30"
+              className="relative z-20 flex justify-center"
             >
-              <div className="relative mx-auto">
+              <div className="relative">
+                {/* Desktop Monitor Design */}
                 <motion.div
-                  className="relative mx-auto w-[280px] sm:w-[320px] md:w-[380px] bg-gradient-to-b from-gray-800 to-black rounded-[3rem] border-[14px] border-gray-900 shadow-2xl overflow-hidden"
+                  className="relative"
                   animate={{
-                    rotateY: [0, -1, 0, 1, 0],
-                    rotateX: [0, 1, 0, -1, 0]
+                    rotateY: [0, -0.5, 0, 0.5, 0],
+                    rotateX: [0, 0.5, 0, -0.5, 0]
                   }}
                   transition={{
-                    duration: 6,
+                    duration: 8,
                     ease: "easeInOut",
                     repeat: Infinity,
                     repeatType: "mirror"
                   }}
-                  style={{ height: "800px" }}
                 >
-                  {/* Status Bar */}
-                  <div className="absolute top-0 inset-x-0 h-8 rounded-t-2xl bg-black flex items-center justify-between px-8 z-10">
-                    <div className="w-12 h-1.5 bg-transparent"></div>
-                    <motion.div 
-                      className="w-16 h-1.5 bg-gray-800 rounded-full"
-                      animate={{ backgroundColor: ["#374151", "#1F2937", "#374151"] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    ></motion.div>
-                    <div className="flex items-center space-x-1.5">
-                      <div className="w-1.5 h-1.5 bg-gray-700 rounded-full"></div>
-                      <div className="w-1.5 h-1.5 bg-gray-700 rounded-full"></div>
-                      <div className="w-1.5 h-1.5 bg-gray-700 rounded-full"></div>
+                  {/* Monitor Screen */}
+                  <div className="relative w-[580px] sm:w-[720px] md:w-[820px] lg:w-[920px] xl:w-[1020px] bg-gradient-to-b from-gray-900 to-black rounded-2xl border-8 border-gray-800 shadow-2xl overflow-hidden mx-auto"
+                       style={{ height: "540px" }}>
+                    
+                    {/* Monitor Bezel */}
+                    <div className="absolute inset-0 rounded-2xl border-4 border-gray-700"></div>
+                    
+                    {/* Browser-like Header */}
+                    <div className="absolute top-0 inset-x-0 h-10 bg-gray-800 flex items-center justify-between px-4 z-10 rounded-t-xl">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      </div>
+                      <div className="flex-1 mx-4">
+                        <div className="bg-gray-700 rounded-md px-3 py-1 text-xs text-gray-400 text-center">
+                          https://pasherdokan.shop
+                        </div>
+                      </div>
+                      <div className="w-16"></div>
+                    </div>
+                    
+                    {/* Screen Content with OpenStreetMap */}
+                    <div className="pt-12 pb-4 overflow-hidden h-full">
+                      <div className="h-full w-full">
+                        <MapContainer 
+                          key={`map-zoom-17-${mapKey}`}
+                          center={[22.3569, 91.7832]} 
+                          zoom={17} 
+                          style={{ height: '100%', width: '100%' }}
+                          attributionControl={false}
+                          zoomControl={false}
+                          dragging={true}
+                          scrollWheelZoom={false}
+                          touchZoom={true}
+                        >
+                          <TileLayer
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                          />
+                          
+                          {/* Render all markers */}
+                          {mapMarkers.map((marker, index) => (
+                            <Marker 
+                              key={index} 
+                              position={marker.position as [number, number]}
+                            >
+                              <Popup>
+                                <strong>{marker.name}</strong> <br /> 
+                                {marker.info}
+                              </Popup>
+                            </Marker>
+                          ))}
+                        </MapContainer>
+                      </div>
                     </div>
                   </div>
-                  
-                  {/* Screen Content with OpenStreetMap - Taller map */}
-                  <div className="pt-10 pb-8 overflow-hidden h-full">
-                    <div className="h-full w-full">
-                      <MapContainer 
-                        center={[22.3569, 91.7832]} 
-                        zoom={14} 
-                        style={{ height: '100%', width: '100%' }}
-                        attributionControl={false}
-                        zoomControl={false}
-                        dragging={true}
-                        scrollWheelZoom={false}
-                        touchZoom={true}
-                      >
-                        <TileLayer
-                          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        
-                        {/* Render all markers */}
-                        {mapMarkers.map((marker, index) => (
-                          <Marker 
-                            key={index} 
-                            position={marker.position as [number, number]}
-                          >
-                            <Popup>
-                              <strong>{marker.name}</strong> <br /> 
-                              {marker.info}
-                            </Popup>
-                          </Marker>
-                        ))}
-                      </MapContainer>
-                    </div>
-                  </div>
-                  
-                  {/* Home Indicator */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-1/3 h-1.5 bg-gray-700 rounded-full"></div>
                 </motion.div>
                 
-                {/* Shadow beneath phone */}
+                {/* Shadow beneath monitor */}
                 <motion.div
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-8 bg-black/20 rounded-full blur-xl z-0"
+                  className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[70%] h-6 bg-black/15 rounded-full blur-xl z-0"
                   animate={{
-                    width: ["55%", "65%", "55%"],
-                    opacity: [0.2, 0.25, 0.2]
+                    width: ["65%", "75%", "65%"],
+                    opacity: [0.15, 0.2, 0.15]
                   }}
                   transition={{
-                    duration: 6,
+                    duration: 8,
                     ease: "easeInOut",
                     repeat: Infinity,
                     repeatType: "mirror"
@@ -422,12 +435,12 @@ const Hero: React.FC = () => {
               </div>
             </motion.div>
             
-            {/* Right Feature Cards */}
-            <div className="hidden lg:block relative z-20 pl-12">
+            {/* Right Feature Cards - Absolutely Positioned */}
+            <div className="hidden xl:block absolute right-0 top-1/2 -translate-y-1/2 z-50" style={{ right: '-150px' }}>
               <motion.div 
                 style={{ y: float2Y }}
-                className="bg-white p-4 rounded-xl shadow-xl border border-gray-100 w-60 mb-8"
-                initial={{ opacity: 0, x: 20 }}
+                className="bg-white p-4 rounded-xl shadow-xl border border-gray-100 w-64 mb-8 relative z-50"
+                initial={{ opacity: 0, x: 120 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.2 }}
               >
@@ -443,6 +456,24 @@ const Hero: React.FC = () => {
                       <Star key={5} size={12} className="text-gray-300" fill="currentColor" stroke="none" />
                     </div>
                     <p className="text-xs text-gray-600">Hyperlocal SME empowerment platform</p>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                style={{ y: float1Y }}
+                className="bg-white/90 backdrop-blur-md rounded-xl shadow-xl border border-gray-100 p-4 w-64 relative z-50"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.8 }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-secondary-100 flex items-center justify-center text-secondary-600 flex-shrink-0">
+                    <Clock size={16} />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900 text-sm">Real-time Updates</h4>
+                    <p className="text-xs text-gray-600">Live inventory tracking</p>
                   </div>
                 </div>
               </motion.div>
