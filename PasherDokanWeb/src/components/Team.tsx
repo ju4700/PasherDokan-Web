@@ -159,16 +159,6 @@ const Team: React.FC = () => {
       image: '/images/zohaifa.jpg',
       bio: 'Architecting the backend infrastructure for PasherDokan\'s scalable platform targeting 96,000 SMEs across Bangladesh.',
     },
-    {
-      name: 'Ahmed Shariar Plabon',
-      role: 'Marketing Strategy Lead',
-      university: 'International Islamic University, Chittagong',
-      email: 'ahmedshahriar948@gmail.com',
-      github: 'https://github.com/shahriar7ahmed',
-      linkedin: 'https://linkedin.com',
-      image: '/images/plabon.jpg',
-      bio: 'Driving market penetration strategy for Bangladesh\'s $6 billion retail addressable market, starting with Chattogram pilot program.',
-    }
   ], []);
 
   useEffect(() => {
