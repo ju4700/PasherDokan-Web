@@ -231,6 +231,31 @@ export const en = {
   'common.close': 'Close',
   'common.submit': 'Submit',
   'common.cancel': 'Cancel',
+
+  // FAQ Questions and Answers
+  'faq.question1': 'What makes PasherDokan different from other e-commerce platforms?',
+  'faq.answer1': 'PasherDokan is a hyperlocal platform specifically designed for Bangladesh\'s SME ecosystem. Unlike platforms like Chaldal or Daraz, we empower local shopkeepers rather than replacing them. We use OpenStreetMap for precise location targeting and preserve customer-preferred cash-on-pickup options.',
+  
+  'faq.question2': 'How much does the subscription cost?',
+  'faq.answer2': 'Our affordable subscription model costs approximately 500 BDT per month (~$4.50 USD). This scalable pricing structure is specifically designed for Bangladesh\'s SME market, providing access to all platform features including inventory management, profit tracking, and customer analytics.',
+  
+  'faq.question3': 'How does cash-on-pickup work?',
+  'faq.answer3': 'Customers can browse products, place pre-orders, and pay in cash when they collect items from your shop. This eliminates forced online payment barriers and respects traditional shopping preferences while providing digital convenience.',
+  
+  'faq.question4': 'Where is PasherDokan launching first?',
+  'faq.answer4': 'We\'re starting with a pilot program of 100 shopkeepers in Chattogram. Our goal is to expand to 400 localities nationwide and eventually achieve 70% shop coverage in the city before expanding across South Asia.',
+  
+  'faq.question5': 'What is the target market size?',
+  'faq.answer5': 'We\'re targeting 96,000 SMEs (10% of Bangladesh\'s 1.2 million retail outlets) in a $6 billion addressable market. SMEs comprise over 80% of Bangladesh\'s retail landscape, creating massive opportunity for hyperlocal innovation.',
+  
+  'faq.question6': 'How do the inventory and analytics systems work?',
+  'faq.answer6': 'Our platform provides automated inventory management with real-time profit/loss tracking per transaction. Shop owners gain insights through customer polls to make informed stocking decisions based on local demand patterns.',
+  
+  'faq.question7': 'Can customers find shops using maps?',
+  'faq.answer7': 'Yes! We integrate OpenStreetMap technology to help customers discover local shops within walking distance. This hyperlocal approach ensures customers find what they need from nearby businesses.',
+  
+  'faq.question8': 'What types of businesses can benefit from PasherDokan?',
+  'faq.answer8': 'All types of SMEs can benefit - grocery stores, pharmacies, electronics shops, clothing stores, restaurants, hardware stores, mobile shops, bookstores, tea stalls, bakeries, and many more. Any business serving local customers can use our hyperlocal platform.',
 };
 
 export default en;
